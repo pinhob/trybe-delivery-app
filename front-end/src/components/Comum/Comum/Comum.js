@@ -9,9 +9,7 @@ const Comum = () => {
   }, [history]);
 
   return (
-    <>
-      Loading
-    </>
+    <h1>Loading</h1>
   );
 };
 
