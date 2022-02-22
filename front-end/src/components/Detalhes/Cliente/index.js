@@ -1,8 +1,14 @@
 import React from 'react';
 
 const DetalhesCliente = () => {
+  const detalhes = {
+    titulo: 'TITULO',
+  };
+
   return (
-    <div>DetalhesCliente</div>
+    <div>
+      <h1>{detalhes.titulo}</h1>
+    </div>
   );
 };
 
