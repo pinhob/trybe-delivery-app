@@ -1,7 +1,12 @@
-import React from 'react'
-import "./Cadastro.css";
+import React from 'react';
+import './Cadastro.css';
 
 const Cadastro = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(e.target.name);
+  };
+
   return (
     <main>
       <div>
@@ -9,24 +14,25 @@ const Cadastro = () => {
           Faça seu Cadastro
         </div>
         <form>
-        <label htmlFor='nome' >
+          <label htmlFor="nome">
             <input
-                type="nome"
-                placeholder="nome"
-                name="nome"
-                id='nome'
-              />
+              type="nome"
+              placeholder="nome"
+              name="nome"
+              id="nome"
+            />
           </label>
-          <label htmlFor='email' >
+          <label htmlFor="email">
             <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                id='email'
-              />
+              type="email"
+              placeholder="Email"
+              name="email"
+              id="email"
+            />
           </label>
-          <label>
+          <label htmlFor="password">
             <input
+              id="password"
               type="password"
               placeholder="Senha"
             />
@@ -34,12 +40,12 @@ const Cadastro = () => {
         </form>
         <div>
           <div>
-            <button type='submit'>CADASTRAR</button>
+            <button onClick={ handleClick } type="submit">CADASTRAR</button>
           </div>
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default Cadastro;

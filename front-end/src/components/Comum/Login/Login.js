@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import "./Login.css";
+import './Login.css';
 
 const Login = () => {
   const history = useHistory();
@@ -10,7 +10,7 @@ const Login = () => {
     console.log(e.target.name);
 
     if (e.target.name === 'cadastrar') {
-      history.push('/cadastro')
+      history.push('/cadastro');
     }
   };
 
@@ -21,16 +21,17 @@ const Login = () => {
           Faça seu Login
         </div>
         <form>
-          <label htmlFor='email' >
+          <label htmlFor="email">
             <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                id='email'
-              />
+              type="email"
+              placeholder="Email"
+              name="email"
+              id="email"
+            />
           </label>
-          <label>
+          <label htmlFor="password">
             <input
+              id="password"
               type="password"
               placeholder="Senha"
             />
@@ -38,15 +39,21 @@ const Login = () => {
         </form>
         <div>
           <div>
-            <button onClick={ handleClick } name='login' type='submit'>LOGIN</button>
+            <button onClick={ handleClick } name="login" type="submit">LOGIN</button>
           </div>
           <div>
-            <button onClick={ handleClick } name='cadastrar' type='submit'>Ainda não tenho conta</button>
+            <button
+              onClick={ handleClick }
+              name="cadastrar"
+              type="submit"
+            >
+              Ainda não tenho conta
+            </button>
           </div>
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default Login;
