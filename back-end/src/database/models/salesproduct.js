@@ -1,4 +1,4 @@
-module.exports = (sequelize, _DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const salesProduct = sequelize.define('SalesProduct',
     {
       quantity: DataTypes.INTEGER,
