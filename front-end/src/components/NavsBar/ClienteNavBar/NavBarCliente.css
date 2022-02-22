@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: green;
+  margin: auto;
+}
+
+
+
+ul {
+  display: flex;
+  flex-direction: row;
+  marker: none;
+  list-style: none;
+}
+
+li {
+  padding-left: 10px;
+  padding-right: 10px;
+}
