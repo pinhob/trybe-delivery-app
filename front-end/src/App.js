@@ -1,15 +1,20 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import Cadastro from './components/Comum/Cadastro/Cadastro';
+import Login from './components/Comum/Login/Login';
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
+import Comum from './components/Comum/Comum/Comum';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <Switch>
+      <Route exact path='/' component={ Comum } />
+      <Route path='/login' component={ Login } />
+      <Route path='/cadastro' component={ Cadastro } />
+    </Switch>
   );
 }
 
