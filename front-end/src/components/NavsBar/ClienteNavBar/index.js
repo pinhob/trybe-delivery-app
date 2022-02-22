@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavBarCliente.css';
+import '../NavBarCliente.css';
 
 const NavBarCliente = () => {
   const user = {
