@@ -55,7 +55,14 @@ const getAll = async () => {
   return result;
 };
 
+const getByName = async (name) => {
+  const result = await User.findOne({ where: { name } });
+  if (!result) throw (errorObject('User does not exist', 404));
+  return result;
+};
+
 module.exports = {
   create,
   getAll,
+  getByName,
 };
