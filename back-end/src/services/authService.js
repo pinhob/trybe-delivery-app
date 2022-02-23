@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const fs = require('fs');
 
-const API_SECRET = fs.readFileSync('../../jwt.evaluation.key');
+// process.cwd() foi pesquisado em:
+// https://www.digitalocean.com/community/tutorials/nodejs-how-to-use__dirname
+const API_SECRET = fs.readFileSync(`${process.cwd()}/jwt.evaluation.key`);
 
 const JWT_CONFIG = {
   expiresIn: 32600,
