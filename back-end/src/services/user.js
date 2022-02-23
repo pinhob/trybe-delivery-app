@@ -30,10 +30,10 @@ const validateDataUser = async (name, email, password, role) => {
   return true;
 };
 
-const isLoggedUserAdministrator = (loggedUser) => {
-  if (!loggedUser || loggedUser.role !== 'administrator') {
-    return false;
-  } 
+const isLoggedUserAdministrator = (role, loggedUser) => {
+  if (role !== 'customer' && (!loggedUser || loggedUser.role !== 'administrator')) {
+    return (errorObject('User is not administrator', 409));
+  }
   return true;
 };
 
@@ -41,10 +41,8 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   const validDataUser = await validateDataUser(name, email, password, role);
   if (validDataUser.message) throw (validDataUser);
 
-  // validar se role !== customer, e verificar se é admin
-  if (role !== 'customer' || isLoggedUserAdministrator(loggedUser)) {
-    throw (errorObject('User is not administrator', 409));
-  }
+  const validLoggedUser = isLoggedUserAdministrator(role, loggedUser);
+  if (validLoggedUser.message) throw (validLoggedUser);
 
   const { id } = await User.create({ name, email, password, role });
   const token = authService.genToken({ id, name, email, role });
