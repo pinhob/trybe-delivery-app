@@ -2,9 +2,10 @@ const authService = require('../services/authService');
 
 const { errorObject } = require('../utils/errorObject');
 
-module.exports = (req, _res, next) => {
+module.exports = async (req, _res, next) => {
   try {
     const { authorization } = req.headers;
+    console.log('passa pelo auth');
     if (!authorization) {
       throw errorObject('Token not found', 401);
     }
