@@ -22,7 +22,20 @@ const getAll = async (_req, res, next) => {
   }
 };
 
+const getById = async (req, res, next) => {
+  try {
+    const { params, loggedUser } = req;
+    const { id } = params;
+    const result = await UserServices.getById(id, loggedUser);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(`ERROR: GET getUserById => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
