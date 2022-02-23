@@ -61,7 +61,10 @@ const getByName = async (name) => {
   return result;
 };
 
-const getById = async (id) => {
+const getById = async (id, loggedUser) => {
+  if (loggedUser.id !== id || isLoggedUserAdministrator(loggedUser)) {
+    throw (errorObject('Unauthorized user', 409));
+  }
   const result = await User.findByPk(id);
   if (!result) throw (errorObject('User does not exist', 404));
   return result;
