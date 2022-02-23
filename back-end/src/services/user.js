@@ -74,9 +74,22 @@ const getById = async (id, loggedUser) => {
   return result;
 };
 
+const exclude = async (id, loggedUser) => {
+  const userExists = await User.findByPk(id);
+  if (!userExists) throw (errorObject('User does not exist', 404));
+
+  if (userExists.id !== id && isLoggedUserAdministrator(loggedUser)) {
+    throw (errorObject('Unauthorized user', 409));
+  }
+
+  const result = User.destroy({ where: { id } });
+  return result;
+};
+
 module.exports = {
   create,
   getAll,
   getByName,
   getById,
+  exclude,
 };
