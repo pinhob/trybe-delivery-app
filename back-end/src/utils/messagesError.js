@@ -1,0 +1,17 @@
+module.exports = {
+  MESSAGE_BAD_REQUEST: 'Invalid entries. Try again.',
+  MESSAGE_UNAUTHORIZED: 'Unauthorized user',
+  MESSAGE_FORBIDDEN: 'Only admins can register new admins',
+  MESSAGE_NOT_FOUND: 'Not found',
+  MESSAGE_USER_NOT_EXISTS: 'User does not exist',
+  MESSAGE_JWT_MISSING: 'missing auth token',
+  MESSAGE_JWT: 'jwt malformed',
+  MESSAGE_CONFLICT_NAME: 'Name user already registered',
+  MESSAGE_CONFLICT_EMAIL: 'Email user already registered',
+  MESSAGE_NOT_ADMIN: 'User is not administrator',
+  STATUS_BAD_REQUEST: 400,
+  STATUS_UNAUTHORIZED: 401,
+  STATUS_FORBIDDEN: 403,
+  STATUS_NOT_FOUND: 404,
+  STATUS_CONFLICT: 409,
+};
