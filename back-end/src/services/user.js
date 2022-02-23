@@ -62,10 +62,14 @@ const getByName = async (name) => {
 };
 
 const getById = async (id, loggedUser) => {
-  if (loggedUser.id !== id || isLoggedUserAdministrator(loggedUser)) {
+  if (loggedUser.id !== id && isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject('Unauthorized user', 409));
   }
-  const result = await User.findByPk(id);
+  const result = await User.findByPk(id, {
+    attributes: {
+      exclude: ['password'],
+    },
+  });
   if (!result) throw (errorObject('User does not exist', 404));
   return result;
 };
