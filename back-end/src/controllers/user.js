@@ -12,6 +12,17 @@ const create = async (req, res, next) => {
   }
 };
 
+const getAll = async (_req, res, next) => {
+  try {
+    const result = await UserServices.getAll();
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(`ERROR: GET getAllUsers => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
+  getAll,
 };
