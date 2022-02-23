@@ -49,6 +49,12 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   return { name, email, role, token };
 };
 
+const getAll = async () => {
+  const result = await User.findAll();
+  return result;
+};
+
 module.exports = {
   create,
+  getAll,
 };
