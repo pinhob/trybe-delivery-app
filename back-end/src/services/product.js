@@ -19,7 +19,7 @@ const getAll = async () => {
 const getById = async (id) => {
   const product = await Product.findByPk(id, {
     attributes: {
-      exclude: ['url_image', 'id'],
+      exclude: ['url_image'],
     },
   });
   if (!product) throw (errorObject('Product does not exist', 404));
