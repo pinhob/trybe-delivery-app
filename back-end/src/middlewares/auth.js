@@ -1,17 +1,18 @@
 const authService = require('../services/authService');
 
 const { errorObject } = require('../utils/errorObject');
+const ERROR = require('../utils/messagesError');
 
 module.exports = async (req, _res, next) => {
   try {
     const { authorization } = req.headers;
     console.log('passa pelo auth');
     if (!authorization) {
-      throw errorObject('Token not found', 401);
+      throw errorObject(ERROR.MESSAGE_JWT_MISSING, ERROR.STATUS_UNAUTHORIZED);
     }
     const verifyAuth = authService.verifyToken(authorization);
     if (!verifyAuth) {
-      throw errorObject('Expired or invalid token', 401);
+      throw errorObject(ERROR.MESSAGE_JWT, ERROR.STATUS_UNAUTHORIZED);
     }
     const { id, name, email, role } = verifyAuth;
     const loggedUser = { id, name, email, role };

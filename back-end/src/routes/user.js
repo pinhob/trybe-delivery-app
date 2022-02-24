@@ -10,5 +10,6 @@ userRouter.post('/', userControllers.create);
 userRouter.post('/login', userControllers.login);
 userRouter.get('/', auth, userControllers.getAll);
 userRouter.get('/:id', auth, userControllers.getById);
+userRouter.delete('/:id', auth, userControllers.exclude);
 
 module.exports = userRouter;
