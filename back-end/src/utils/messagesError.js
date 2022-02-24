@@ -13,6 +13,7 @@ module.exports = {
   MESSAGE_CONFLICT_EMAIL: 'Email user already registered',
   MESSAGE_NOT_ADMIN: 'User is not administrator',
   MESSAGE_INV_FIELDS: 'Invalid fields',
+  MESSAGE_INV_STATUS: 'Status not found',
   STATUS_BAD_REQUEST: 400,
   STATUS_UNAUTHORIZED: 401,
   STATUS_FORBIDDEN: 403,
