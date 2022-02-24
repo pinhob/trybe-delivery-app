@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const URL_PRODUCTS = 'http://localhost:3001/products';
+const URL = 'http://localhost:3001';
 
-const URL_USER = 'http://localhost:3001/users';
+export const fetchAllProducts = () => axios.get(`${URL}/products`);
 
-export const fetchAllProducts = () => axios.get(URL_PRODUCTS);
+export const createUser = (user) => axios.post(`${URL}/users`, user);
 
-export const createUser = (user) => axios.post(URL_USER, user);
+export const loginUser = (email, password) => axios.post(`${URL}/users/login`, { email, password });
