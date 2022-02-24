@@ -34,6 +34,16 @@ const getById = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const result = await UserServices.login(email, password);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(`ERROR: GET login=> ${error.message}`);
+  }
+};
+
 const exclude = async (req, res, next) => {
   try {
     const { params, loggedUser } = req;
@@ -50,5 +60,6 @@ module.exports = {
   create,
   getAll,
   getById,
+  login,
   exclude,
-};
+}

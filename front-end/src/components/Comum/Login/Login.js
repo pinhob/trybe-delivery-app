@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { loginUser } from '../../../api';
 import './Login.css';
 
 const Login = () => {
   const history = useHistory();
+
+  const [dataUser, setDataUser] = useState({
+    email: '',
+    password: '',
+  });
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -11,6 +17,16 @@ const Login = () => {
 
     if (e.target.name === 'cadastrar') {
       history.push('/cadastro');
+    }
+  };
+
+  const handleClickLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = dataUser;
+    const { data } = await loginUser(email, password);
+    console.log(data);
+    if (data) {
+      history.push('/produtos');
     }
   };
 
@@ -23,6 +39,7 @@ const Login = () => {
         <form>
           <label htmlFor="email">
             <input
+              onChange={ (e) => setDataUser({ ...dataUser, email: e.target.value }) }
               type="email"
               placeholder="Email"
               name="email"
@@ -31,6 +48,7 @@ const Login = () => {
           </label>
           <label htmlFor="password">
             <input
+              onChange={ (e) => setDataUser({ ...dataUser, password: e.target.value }) }
               id="password"
               type="password"
               placeholder="Senha"
@@ -39,7 +57,7 @@ const Login = () => {
         </form>
         <div>
           <div>
-            <button onClick={ handleClick } name="login" type="submit">LOGIN</button>
+            <button onClick={ handleClickLogin } name="login" type="submit">LOGIN</button>
           </div>
           <div>
             <button

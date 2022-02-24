@@ -3,9 +3,10 @@ const authService = require('../services/authService');
 const { errorObject } = require('../utils/errorObject');
 const ERROR = require('../utils/messagesError');
 
-module.exports = (req, _res, next) => {
+module.exports = async (req, _res, next) => {
   try {
     const { authorization } = req.headers;
+    console.log('passa pelo auth');
     if (!authorization) {
       throw errorObject(ERROR.MESSAGE_JWT_MISSING, ERROR.STATUS_UNAUTHORIZED);
     }
