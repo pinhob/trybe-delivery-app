@@ -7,13 +7,12 @@ const Login = () => {
   const history = useHistory();
 
   const [dataUser, setDataUser] = useState({
-    email: '',
+    name: '',
     password: '',
   });
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(e.target.name);
 
     if (e.target.name === 'cadastrar') {
       history.push('/cadastro');
@@ -22,12 +21,12 @@ const Login = () => {
 
   const handleClickLogin = async (e) => {
     e.preventDefault();
-    const { email, password } = dataUser;
-    const { data } = await loginUser(email, password);
+    const { name, password } = dataUser;
+    const { data } = await loginUser(name, password);
     console.log(data);
-    if (data) {
-      history.push('/produtos');
-    }
+    // if (data) {
+    //   history.push('/produtos');
+    // }
   };
 
   return (
@@ -37,13 +36,13 @@ const Login = () => {
           Faça seu Login
         </div>
         <form>
-          <label htmlFor="email">
+          <label htmlFor="name">
             <input
-              onChange={ (e) => setDataUser({ ...dataUser, email: e.target.value }) }
-              type="email"
-              placeholder="Email"
-              name="email"
-              id="email"
+              onChange={ (e) => setDataUser({ ...dataUser, name: e.target.value }) }
+              type="name"
+              placeholder="name"
+              name="name"
+              id="name"
             />
           </label>
           <label htmlFor="password">

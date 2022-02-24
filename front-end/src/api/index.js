@@ -6,4 +6,5 @@ export const fetchAllProducts = () => axios.get(`${URL}/products`);
 
 export const createUser = (user) => axios.post(`${URL}/users`, user);
 
-export const loginUser = (email, password) => axios.post(`${URL}/users/login`, { email, password });
+export const loginUser = (name, password) => axios.post(`${URL}/login`, { name,
+  password });
