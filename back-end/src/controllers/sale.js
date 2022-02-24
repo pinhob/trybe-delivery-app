@@ -64,10 +64,24 @@ const updateStatus = async (req, res, next) => {
   }
 };
 
+const exclude = async (req, res, next) => {
+  try {
+    const { params, loggedUser } = req;
+    const { id: userId, role } = loggedUser;
+    const { id } = params;
+    await SaleServices.exclude(id, userId, role);
+    return res.status(204).send();
+  } catch (error) {
+    console.log(`ERROR: DELETE excludeSale => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
   updateStatus,
+  exclude,
 };
