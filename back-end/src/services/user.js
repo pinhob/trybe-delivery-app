@@ -52,7 +52,8 @@ const create = async ({ name, email, password, role, loggedUser }) => {
 };
 
 const getAll = async () => {
-  const result = await User.findAll();
+  const result = await User.findAll({ attributes: {
+      exclude: ['password'] } });
   return result;
 };
 
