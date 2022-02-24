@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { infoUser } from '../../../app/slices/user';
 import { useHistory } from 'react-router-dom';
 import { loginUser } from '../../../api';
 import './Login.css';
 
 const Login = () => {
+  const dispatch = useDispatch()
   const history = useHistory();
 
   const [dataUser, setDataUser] = useState({
@@ -24,9 +27,11 @@ const Login = () => {
     const { name, password } = dataUser;
     const { data } = await loginUser(name, password);
     console.log(data);
-    // if (data) {
-    //   history.push('/produtos');
-    // }
+    
+    if (data) {
+      dispatch(infoUser(data));
+      history.push('/produtos');
+    }
   };
 
   return (
