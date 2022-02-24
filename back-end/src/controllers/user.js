@@ -34,8 +34,21 @@ const getById = async (req, res, next) => {
   }
 };
 
+const exclude = async (req, res, next) => {
+  try {
+    const { params, loggedUser } = req;
+    const { id } = params;
+    await UserServices.exclude(id, loggedUser);
+    return res.status(200).send();
+  } catch (error) {
+    console.log(`ERROR: DELETE deleteUser => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  exclude,
 };

@@ -5,6 +5,7 @@ const { User } = require('../database/models');
 const authService = require('./authService');
 
 const { errorObject } = require('../utils/errorObject');
+const ERROR = require('../utils/messagesError');
 
 const userSchema = Joi.object({
   name: Joi.string().min(12).required(),
@@ -18,14 +19,14 @@ const validateDataUser = async (name, email, password, role) => {
   if (error) {
     const err = new Error(error.details.map((errorObj) => errorObj.message).toString());
     err.code = 'invalid_data';
-    err.status = 400;
+    err.status = ERROR.STATUS_BAD_REQUEST;
     return (err);
   }
 
   const nameAlreadyExists = await User.findOne({ where: { name } });
-  if (nameAlreadyExists) return (errorObject('Name user already registered', 409));
+  if (nameAlreadyExists) return (errorObject(ERROR.MESSAGE_CONFLICT_NAME, ERROR.STATUS_CONFLICT));
   const emailAlreadyExists = await User.findOne({ where: { email } });
-  if (emailAlreadyExists) return (errorObject('Email user already registered', 409));
+  if (emailAlreadyExists) return (errorObject(ERROR.MESSAGE_CONFLICT_EMAIL, ERROR.STATUS_CONFLICT));
 
   return true;
 };
@@ -42,7 +43,7 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   if (validDataUser.message) throw (validDataUser);
 
   if (role !== 'customer' || isLoggedUserAdministrator(loggedUser)) {
-    throw (errorObject('User is not administrator', 409));
+    throw (errorObject(ERROR.MESSAGE_NOT_ADMIN, ERROR.STATUS_CONFLICT));
   }
   
   const { id } = await User.create({ name, email, password, role });
@@ -51,26 +52,39 @@ const create = async ({ name, email, password, role, loggedUser }) => {
 };
 
 const getAll = async () => {
-  const result = await User.findAll();
+  const result = await User.findAll({ attributes: {
+      exclude: ['password'] } });
   return result;
 };
 
 const getByName = async (name) => {
   const result = await User.findOne({ where: { name } });
-  if (!result) throw (errorObject('User does not exist', 404));
+  if (!result) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
   return result;
 };
 
 const getById = async (id, loggedUser) => {
   if (loggedUser.id !== id && isLoggedUserAdministrator(loggedUser)) {
-    throw (errorObject('Unauthorized user', 409));
+    throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
   }
   const result = await User.findByPk(id, {
     attributes: {
       exclude: ['password'],
     },
   });
-  if (!result) throw (errorObject('User does not exist', 404));
+  if (!result) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
+  return result;
+};
+
+const exclude = async (id, loggedUser) => {
+  const userExists = await User.findByPk(id);
+  if (!userExists) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
+
+  if (userExists.id !== id && isLoggedUserAdministrator(loggedUser)) {
+    throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
+  }
+
+  const result = User.destroy({ where: { id } });
   return result;
 };
 
@@ -79,4 +93,5 @@ module.exports = {
   getAll,
   getByName,
   getById,
+  exclude,
 };
