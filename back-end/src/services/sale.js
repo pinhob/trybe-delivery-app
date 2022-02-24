@@ -23,6 +23,14 @@ const validateProducts = async (products) => products.map(async (product) => {
   }
 });
 
+const getQueryFilters = (seller, status, user) => {
+  const query = {};
+  if (seller !== '') query.selerId = seller;
+  if (status !== '') query.status = status;
+  if (user !== '') query.userId = user;
+  return query;
+};
+
 const create = async (sale) => {
   const { userId, totalPrice, deliveryAddress, deliveryNumber, status, products } = sale;
   const { error } = saleSchema
@@ -48,13 +56,24 @@ const create = async (sale) => {
   return result;
 };
 
-const getAll = async () => {
-  const result = await Sale.findAll({
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Product, as: 'products', through: { attributes: [] } },
-    ],
-  });
+const getAll = async (seller, status, user) => {
+  let result = [];
+  if (seller === '' && status === '' && user === '') {
+    result = await Sale.findAll({
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Product, as: 'products', through: { attributes: [] } },
+      ],
+    });
+  } else {
+    const query = getQueryFilters(seller, status, user);
+    result = await Sale.findAll({ where: query,
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Product, as: 'products', through: { attributes: [] } },
+      ],
+    });
+  }
   return result;
 }; 
 

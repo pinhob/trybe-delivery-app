@@ -14,9 +14,10 @@ const create = async (req, res, next) => {
   }
 };
 
-const getAll = async (_req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
-    const result = await SaleServices.getAll();
+    const { seller = '', status = '', user = '' } = req.query;
+    const result = await SaleServices.getAll(seller, status, user);
     return res.status(201).json(result);
   } catch (error) {
     console.log(`ERROR: POST createSale => ${error.message}`);
