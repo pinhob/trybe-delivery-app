@@ -14,6 +14,17 @@ const create = async (req, res, next) => {
   }
 };
 
+const getAll = async (_req, res, next) => {
+  try {
+    const result = await SaleServices.getAll();
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(`ERROR: POST createSale => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
+  getAll,
 };
