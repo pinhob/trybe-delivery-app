@@ -52,9 +52,22 @@ const update = async (req, res, next) => {
   }
 };
 
+const updateStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.query;
+    const result = await SaleServices.updateStatus(id, status);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(`ERROR: PUT updateStatusSale => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  updateStatus,
 };
