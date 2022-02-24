@@ -48,6 +48,17 @@ const create = async (sale) => {
   return result;
 };
 
+const getAll = async () => {
+  const result = await Sale.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Product, as: 'products', through: { attributes: [] } },
+    ],
+  });
+  return result;
+}; 
+
 module.exports = {
   create,
+  getAll,
 };
