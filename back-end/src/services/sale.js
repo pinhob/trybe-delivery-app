@@ -129,13 +129,25 @@ const updateStatus = async (id, status) => {
     throw (errorObject(ERROR.MESSAGE_INV_STATUS, ERROR.STATUS_BAD_REQUEST));
   }
   
-  const salesExists = await Sale.findByPk(id);
-  if (!salesExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+  const saleExists = await Sale.findByPk(id);
+  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
 
   await Sale.update({ status }, { where: { id } });
 
   const result = await Sale.findByPk(id, { include: includeObjectSale });
 
+  return result;
+};
+
+const exclude = async (id, userId, role) => {
+  const saleExists = await Sale.findByPk(id);
+  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+
+  if (saleExists.userId !== userId && role !== 'administrator') {
+    throw (errorObject(ERROR.MESSAGE_UNAUTHORIZED, ERROR.STATUS_UNAUTHORIZED));
+  }
+
+  const result = Sale.destroy({ where: { id } });
   return result;
 };
 
@@ -145,4 +157,5 @@ module.exports = {
   getById,
   update,
   updateStatus,
+  exclude,
 };
