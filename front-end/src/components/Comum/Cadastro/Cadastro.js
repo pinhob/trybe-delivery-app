@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { createUser } from '../../../api';
 import './Cadastro.css';
 
@@ -9,11 +10,16 @@ const Cadastro = () => {
     password: '',
   });
 
+  const history = useHistory();
+
   const handleClick = async (e) => {
     e.preventDefault();
 
     const { data } = await createUser(dataUser);
     console.log(data);
+    if (data) {
+      history.push('/produtos');
+    }
   };
 
   return (

@@ -74,9 +74,17 @@ const getById = async (id, loggedUser) => {
   return result;
 };
 
+const login = async (email, password) => {
+  const result = await User.findOne({ where: { email, password } });
+  console.log('passou no service');
+  if (!result) throw (errorObject('User does not exist', 404));
+  return result;
+};
+
 module.exports = {
   create,
   getAll,
   getByName,
   getById,
+  login,
 };
