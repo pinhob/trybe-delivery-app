@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import fetchAllProducts from '../api';
+import { fetchAllProducts } from '../api';
 
 export const productsSlice = createSlice({
   name: 'products',

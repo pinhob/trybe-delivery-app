@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createUser } from '../../../api';
 import './Cadastro.css';
 
 const Cadastro = () => {
-  const handleClick = (e) => {
+  const [dataUser, setDataUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleClick = async (e) => {
     e.preventDefault();
-    console.log(e.target.name);
+
+    const { data } = await createUser(dataUser);
+    console.log(data);
   };
 
   return (
@@ -16,6 +25,7 @@ const Cadastro = () => {
         <form>
           <label htmlFor="nome">
             <input
+              onChange={ (e) => setDataUser({ ...dataUser, name: e.target.value }) }
               type="nome"
               placeholder="nome"
               name="nome"
@@ -24,6 +34,7 @@ const Cadastro = () => {
           </label>
           <label htmlFor="email">
             <input
+              onChange={ (e) => setDataUser({ ...dataUser, email: e.target.value }) }
               type="email"
               placeholder="Email"
               name="email"
@@ -32,6 +43,7 @@ const Cadastro = () => {
           </label>
           <label htmlFor="password">
             <input
+              onChange={ (e) => setDataUser({ ...dataUser, password: e.target.value }) }
               id="password"
               type="password"
               placeholder="Senha"

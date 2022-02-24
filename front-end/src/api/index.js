@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3001/products';
+const URL_PRODUCTS = 'http://localhost:3001/products';
 
-const fetchAllProducts = () => axios.get(URL);
+const URL_USER = 'http://localhost:3001/users';
 
-export default fetchAllProducts;
+export const fetchAllProducts = () => axios.get(URL_PRODUCTS);
+
+export const createUser = (user) => axios.post(URL_USER, user);
