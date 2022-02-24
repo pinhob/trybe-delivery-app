@@ -38,8 +38,23 @@ const getById = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status, products } = req.body;
+    const result = await SaleServices.update({
+      id, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status, products });
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(`ERROR: PUT updateSale => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  update,
 };
