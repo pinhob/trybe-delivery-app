@@ -5,6 +5,8 @@ module.exports = {
   MESSAGE_NOT_FOUND: 'Not found',
   MESSAGE_USER_NOT_EXISTS: 'User does not exist',
   MESSAGE_PROD_NOT_EXISTS: 'Product does not exist',
+  MESSAGE_SALE_NOT_EXISTS: 'Sale does not exist',
+  MESSAGE_PROD_NOT_QTT: 'Product does not quantity',
   MESSAGE_JWT_MISSING: 'Token not found',
   MESSAGE_JWT: 'Expired or invalid token',
   MESSAGE_CONFLICT_NAME: 'Name user already registered',
