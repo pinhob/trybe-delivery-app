@@ -1,25 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import fetchAllProducts from '../../api';
 
 const Products = () => {
-  const product = {
-    name: 'produto',
-  };
+  const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await fetchAllProducts();
-      console.log(data);
+      setProdutos(data);
     };
     fetchData();
-  }, []);
+  }, [produtos]);
 
   return (
-    <div>
-      <ul>
-        {product.name}
-      </ul>
-    </div>
+    <ul>
+      {produtos.map((p) => (
+        <li key={ p.id }>
+          <div>
+            <p>{p.price}</p>
+            <img src={ p.url_image } alt="foto do produto" />
+          </div>
+          <div>
+            <p>{p.name}</p>
+            <div>
+              <button type="button">-</button>
+              <span>0</span>
+              <button type="button">+</button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 };
 
