@@ -34,7 +34,6 @@ const getById = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -42,7 +41,9 @@ const login = async (req, res, next) => {
     return res.status(200).json(result);
   } catch (error) {
     console.log(`ERROR: GET login=> ${error.message}`);
-=======
+  }
+};
+
 const exclude = async (req, res, next) => {
   try {
     const { params, loggedUser } = req;
@@ -51,7 +52,6 @@ const exclude = async (req, res, next) => {
     return res.status(200).send();
   } catch (error) {
     console.log(`ERROR: DELETE deleteUser => ${error.message}`);
->>>>>>> 7a12d84d1369ca547c6a283ce2524808e3aaa3d8
     return next(error);
   }
 };
@@ -60,9 +60,6 @@ module.exports = {
   create,
   getAll,
   getById,
-<<<<<<< HEAD
   login,
-=======
   exclude,
->>>>>>> 7a12d84d1369ca547c6a283ce2524808e3aaa3d8
-};
+}

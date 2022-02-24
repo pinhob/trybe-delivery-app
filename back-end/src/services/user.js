@@ -88,21 +88,10 @@ const exclude = async (id, loggedUser) => {
   return result;
 };
 
-const login = async (email, password) => {
-  const result = await User.findOne({ where: { email, password } });
-
-  if (!result) throw (errorObject('User does not exist', 404));
-  return result;
-};
-
 module.exports = {
   create,
   getAll,
   getByName,
   getById,
-<<<<<<< HEAD
-  login,
-=======
   exclude,
->>>>>>> 7a12d84d1369ca547c6a283ce2524808e3aaa3d8
 };
