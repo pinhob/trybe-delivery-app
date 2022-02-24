@@ -24,7 +24,19 @@ const getAll = async (_req, res, next) => {
   }
 };
 
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await SaleServices.getById(id);
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(`ERROR: POST createSale => ${error.message}`);
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
