@@ -58,7 +58,21 @@ const getAll = async () => {
   return result;
 }; 
 
+const getById = async (id) => {
+  const result = await Sale.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Product, as: 'products', through: { attributes: [] } },
+    ],
+  });
+
+  if (!result) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+
+  return result;
+}; 
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
