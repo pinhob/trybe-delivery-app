@@ -124,9 +124,25 @@ const update = async ({
   return result;
 };
 
+const updateStatus = async (id, status) => {
+  if (!status || status === '') {
+    throw (errorObject(ERROR.MESSAGE_INV_STATUS, ERROR.STATUS_BAD_REQUEST));
+  }
+  
+  const salesExists = await Sale.findByPk(id);
+  if (!salesExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+
+  await Sale.update({ status }, { where: { id } });
+
+  const result = await Sale.findByPk(id, { include: includeObjectSale });
+
+  return result;
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  updateStatus,
 };
