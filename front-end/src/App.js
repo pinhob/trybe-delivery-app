@@ -13,7 +13,7 @@ function App() {
       <Route path="/login" component={ Login } />
       <Route path="/produtos" component={ Products } />
       <Route path="/cadastro" component={ Cadastro } />
-      <Route path="/cliente/detalhesdopedido" component={ DetalhesCliente } />
+      <Route path="/meuspedidos" component={ DetalhesCliente } />
     </Switch>
   );
 }

@@ -15,11 +15,16 @@ const NavBarCliente = () => {
     token: '',
   };
 
-  const handleClick = () => {
+  const checkoutClick = (e) => {
+    e.preventDefault();
     localStorage.user = JSON.stringify(checkout);
     dispatch(infoUser(checkout));
     history.push('/login');
   };
+
+  const pedidosClick = () => {
+
+  }
 
   return (
     <main className="main-container">
@@ -28,9 +33,9 @@ const NavBarCliente = () => {
           <li>
             PRODUTOS
           </li>
-          <li>
+          <button type="button">
             MEUS PEDIDOS
-          </li>
+          </button>
         </ul>
       </div>
       <div>
@@ -38,7 +43,7 @@ const NavBarCliente = () => {
           <li>
             {user.name}
           </li>
-          <button onClick={ handleClick } type="button">
+          <button onClick={ checkoutClick } type="button">
             Sair
           </button>
         </ul>
