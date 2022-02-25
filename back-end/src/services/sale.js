@@ -1,6 +1,8 @@
 const Joi = require('joi');
 
-const { User, Sale, Product, SalesProduct } = require('../database/models');
+const {
+  user: User, sale: Sale, product: Product, salesProduct: SalesProduct,
+} = require('../database/models');
 
 const { errorObject } = require('../utils/errorObject');
 const ERROR = require('../utils/messagesError');

@@ -1,4 +1,4 @@
-const { Product } = require('../database/models');
+const { product: Product } = require('../database/models');
 
 const { errorObject } = require('../utils/errorObject');
 const ERROR = require('../utils/messagesError');
