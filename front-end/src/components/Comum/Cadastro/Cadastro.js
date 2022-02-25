@@ -22,6 +22,7 @@ const Cadastro = () => {
     console.log(data);
     if (data) {
       dispatch(infoUser(data));
+      localStorage.user = JSON.stringify(data);
       history.push('/produtos');
     }
   };
