@@ -76,6 +76,16 @@ const getById = async (id, loggedUser) => {
   return result;
 };
 
+const getSellers = async () => {
+  const result = await User
+    .findAll({
+      where: { role: 'seller' },
+      attributes: { exclude: ['password'] },
+    });
+  if (!result) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
+  return result;
+};
+
 const exclude = async (id, loggedUser) => {
   const userExists = await User.findByPk(id);
   if (!userExists) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
@@ -93,5 +103,6 @@ module.exports = {
   getAll,
   getByName,
   getById,
+  getSellers,
   exclude,
 };
