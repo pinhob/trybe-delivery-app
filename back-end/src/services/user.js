@@ -48,7 +48,7 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   
   const { id } = await User.create({ name, email, password, role });
   const token = authService.genToken({ id, name, email, role });
-  return { name, email, role, token };
+  return { id, name, email, role, token };
 };
 
 const getAll = async () => {

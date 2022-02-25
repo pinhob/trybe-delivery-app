@@ -17,7 +17,7 @@ const login = async (name, password) => {
 
   const token = authService.genToken({ id, name, email, role });
 
-  return { name, email, role, token };
+  return { id, name, email, role, token };
 };
 
 module.exports = {
