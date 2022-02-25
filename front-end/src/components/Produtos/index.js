@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../../api/index';
+import DetalhesCliente from '../Detalhes/Cliente';
 import NavBarCliente from '../NavsBar/ClienteNavBar';
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
   const userData = JSON.parse(localStorage.user);
 
+  const addItem = (item, index) => {
+    const quantidade = item.quantidade + 1;
+
+    setProdutos(Object.values(
+      { ...produtos, [index]: { ...produtos[index], quantidade } },
+    ));
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      console.log(userData.token);
       const { data } = await fetchAllProducts(userData.token);
-      setProdutos(data);
+      const newData = data.map((d) => {
+        d.quantidade = 0;
+        return d;
+      });
+      setProdutos(newData);
     };
     fetchData();
   }, [userData.token]);
@@ -19,7 +31,7 @@ const Products = () => {
     <main>
       <NavBarCliente />
       <ul>
-        {produtos.map((p) => (
+        {produtos.map((p, index) => (
           <li key={ p.id }>
             <div>
               <p>{p.price}</p>
@@ -29,13 +41,14 @@ const Products = () => {
               <p>{p.name}</p>
               <div>
                 <button type="button">-</button>
-                <span>0</span>
-                <button type="button">+</button>
+                <span>{p.quantidade}</span>
+                <button onClick={ () => addItem(p, index) } type="button">+</button>
               </div>
             </div>
           </li>
         ))}
       </ul>
+      <DetalhesCliente carrinho={ produtos } />
     </main>
   );
 };
