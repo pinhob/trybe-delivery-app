@@ -84,6 +84,10 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <div className="empty" data-testid="common_login__element-invalid-email">
+        <p>Email ou senha inválidos</p>
+      </div>
     </main>
   );
 };
