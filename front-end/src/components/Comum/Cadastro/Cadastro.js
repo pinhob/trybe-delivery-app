@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { infoUser } from '../../../app/slices/user';
 import { createUser } from '../../../api';
 import './Cadastro.css';
 
 const Cadastro = () => {
+  const dispatch = useDispatch();
   const [dataUser, setDataUser] = useState({
     name: '',
     email: '',
@@ -18,6 +21,7 @@ const Cadastro = () => {
     const { data } = await createUser(dataUser);
     console.log(data);
     if (data) {
+      dispatch(infoUser(data));
       history.push('/produtos');
     }
   };
