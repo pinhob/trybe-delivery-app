@@ -41,6 +41,7 @@ const Cadastro = () => {
               placeholder="nome"
               name="nome"
               id="nome"
+              data-testid="common_register__input-name" 
             />
           </label>
           <label htmlFor="email">
@@ -50,6 +51,7 @@ const Cadastro = () => {
               placeholder="Email"
               name="email"
               id="email"
+              data-testid="common_register__input-email"
             />
           </label>
           <label htmlFor="password">
@@ -58,14 +60,22 @@ const Cadastro = () => {
               id="password"
               type="password"
               placeholder="Senha"
+              data-testid=" common_register__input-password"
             />
           </label>
         </form>
         <div>
           <div>
-            <button onClick={ handleClick } type="submit">CADASTRAR</button>
+            <button 
+            onClick={ handleClick } 
+            type="submit"
+            data-testid="common_register__button-register"
+            >CADASTRAR</button>
           </div>
         </div>
+        <div className="empty" data-testid=" common_register__element-invalid_register">
+        <p>Campos inválidos</p>
+      </div>
       </div>
     </main>
   );
