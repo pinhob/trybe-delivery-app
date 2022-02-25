@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+app.use(express.static(`${__dirname}/public`));
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.get('/', async (_req, res) => {
