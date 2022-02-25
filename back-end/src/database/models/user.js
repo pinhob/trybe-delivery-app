@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('User', {
+  const user = sequelize.define('user', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   user.associate = (models) => {
-    user.hasMany(models.Sale, { foreignKey: 'userId', as: 'user' });
-    user.hasMany(models.Sale, { foreignKey: 'sellerId', as: 'sale' });
+    user.hasMany(models.sale, { foreignKey: 'userId', as: 'user' });
+    user.hasMany(models.sale, { foreignKey: 'sellerId', as: 'sale' });
   };
 
   return user;

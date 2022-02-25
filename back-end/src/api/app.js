@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { User } = require('../database/models');
-
 const router = require('../routes');
 const errorHandler = require('../middlewares/errorHandler');
 
@@ -18,8 +16,7 @@ app.use(express.static(`${__dirname}/public`));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.get('/', async (_req, res) => {
-  const result = await User.findAll();
-  res.status(200).json(result);
+  res.status(200).json('Dona Tereza - Delivery App');
 });
 
 app.use(router);
