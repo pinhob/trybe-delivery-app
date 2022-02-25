@@ -3,9 +3,9 @@ body {
 }
 
 .main-container {
+  background-color: green;
   display: flex;
   flex-direction: row;
-  background-color: green;
   justify-content: space-between;
   margin: auto;
 }
