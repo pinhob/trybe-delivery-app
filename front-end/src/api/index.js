@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const URL = 'http://localhost:3001';
 
-export const fetchAllProducts = () => axios.get(`${URL}/products`);
+export const fetchAllProducts = (token) => axios.get(`${URL}/products`,
+  { headers: { authorization: `${token}` } });
 
 export const createUser = (user) => axios.post(`${URL}/users`, user);
 

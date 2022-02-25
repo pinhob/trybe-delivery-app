@@ -3,14 +3,16 @@ import { fetchAllProducts } from '../../api/index';
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
+  const userData = JSON.parse(localStorage.user);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await fetchAllProducts();
+      console.log(userData.token);
+      const { data } = await fetchAllProducts(userData.token);
       setProdutos(data);
     };
     fetchData();
-  }, [produtos]);
+  }, [userData.token]);
 
   return (
     <ul>

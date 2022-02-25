@@ -26,10 +26,10 @@ const Login = () => {
     e.preventDefault();
     const { name, password } = dataUser;
     const { data } = await loginUser(name, password);
-    console.log(data);
 
     if (data) {
       dispatch(infoUser(data));
+      localStorage.user = JSON.stringify(data);
       history.push('/produtos');
     }
   };
