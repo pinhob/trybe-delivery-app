@@ -1,9 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import '../NavBarCliente.css';
+import { infoUser } from '../../../app/slices/user';
 
 const NavBarCliente = () => {
-  const user = {
-    name: 'Cicrado da Silva',
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const checkout = {
+    name: '',
+    email: '',
+    role: '',
+    token: '',
+  };
+
+  const handleClick = () => {
+    localStorage.user = JSON.stringify(checkout);
+    dispatch(infoUser(checkout));
+    history.push('/login');
   };
 
   return (
@@ -23,9 +38,9 @@ const NavBarCliente = () => {
           <li>
             {user.name}
           </li>
-          <li>
+          <button onClick={ handleClick } type="button">
             Sair
-          </li>
+          </button>
         </ul>
       </div>
     </main>

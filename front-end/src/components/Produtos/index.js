@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../../api/index';
+import NavBarCliente from '../NavsBar/ClienteNavBar';
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
@@ -15,24 +16,27 @@ const Products = () => {
   }, [userData.token]);
 
   return (
-    <ul>
-      {produtos.map((p) => (
-        <li key={ p.id }>
-          <div>
-            <p>{p.price}</p>
-            <img src={ p.url_image } alt="foto do produto" />
-          </div>
-          <div>
-            <p>{p.name}</p>
+    <main>
+      <NavBarCliente />
+      <ul>
+        {produtos.map((p) => (
+          <li key={ p.id }>
             <div>
-              <button type="button">-</button>
-              <span>0</span>
-              <button type="button">+</button>
+              <p>{p.price}</p>
+              <img src={ p.url_image } alt="foto do produto" />
             </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+            <div>
+              <p>{p.name}</p>
+              <div>
+                <button type="button">-</button>
+                <span>0</span>
+                <button type="button">+</button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </main>
   );
 };
 
