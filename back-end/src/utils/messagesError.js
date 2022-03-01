@@ -9,6 +9,7 @@ module.exports = {
   MESSAGE_PROD_NOT_QTT: 'Product does not quantity',
   MESSAGE_JWT_MISSING: 'Token not found',
   MESSAGE_JWT: 'Expired or invalid token',
+  MESSAGE_CONFLICT_USER: 'Name or email already registered',
   MESSAGE_CONFLICT_NAME: 'Name user already registered',
   MESSAGE_CONFLICT_EMAIL: 'Email user already registered',
   MESSAGE_NOT_ADMIN: 'User is not administrator',
