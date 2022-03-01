@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import '../NavBarCliente.css';
 import { infoUser } from '../../../app/slices/user';
 
 const NavBarCliente = () => {
@@ -21,10 +20,6 @@ const NavBarCliente = () => {
     dispatch(infoUser(checkout));
     history.push('/login');
   };
-
-  const pedidosClick = () => {
-
-  }
 
   return (
     <main className="main-container">
