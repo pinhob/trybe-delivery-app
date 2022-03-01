@@ -3,20 +3,18 @@ body {
 }
 
 .main-container {
+  background-color: green;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: green;
   margin: auto;
 }
-
-
 
 ul {
   display: flex;
   flex-direction: row;
-  marker: none;
   list-style: none;
+  marker: none;
 }
 
 li {

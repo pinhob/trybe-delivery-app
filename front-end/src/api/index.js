@@ -9,3 +9,9 @@ export const createUser = (user) => axios.post(`${URL}/users`, user);
 
 export const loginUser = (name, password) => axios.post(`${URL}/login`, { name,
   password });
+
+export const getSellers = (token) => axios.get(`${URL}/users/sellers`,
+  { headers: { authorization: `${token}` } });
+
+export const createSale = (sale, token) => axios.post(`${URL}/sales`, sale,
+  { headers: { authorization: `${token}` } });

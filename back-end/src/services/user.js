@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { User } = require('../database/models');
+const { user: User } = require('../database/models');
 
 const authService = require('./authService');
 
