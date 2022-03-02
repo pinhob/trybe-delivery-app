@@ -1,5 +1,5 @@
 const chai = require('chai');
-const { stub } = require('sinon');
+const sinon = require('sinon');
 const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
@@ -38,11 +38,30 @@ const userPayload3 = {
   role: 'administrator',
 };
 
+const userResultPayload1 = {
+  id: 1,
+  name: 'Usuario Cadastrado 1',
+  email: 'usuario_1@gmail.com',
+  role: 'customer',
+};
+
+const userResultPayload2 = {
+  id: 2,
+  name: 'Vendedor Cadastrado',
+  email: 'vendedor@gmail.com',
+  role: 'seller',
+};
+
+const userResultPayload3 = {
+  id: 3,
+  name: 'Administrador Cadastrado',
+  email: 'administrador@gmail.com',
+  role: 'administrator',
+};
+
 describe('Route USERS', () => {
   let tokenValid;
   let idTest;
-  const findAllStub = stub(User, 'findAll');
-  const findByPkStub = stub(User, 'findByPk');
   
   describe('GET', () => {
     before(async () => {
@@ -73,11 +92,11 @@ describe('Route USERS', () => {
     describe('User not exists', () => {
 
       before(() => {
-        findAllStub.resolves([]);
+        sinon.stub(User, 'findAll').resolves([]);
       });
 
       after(() => {
-        findAllStub.restore();
+        User.findAll.restore();
       });
 
       it('status is 200', async () => {
@@ -98,11 +117,11 @@ describe('Route USERS', () => {
 
     describe('User exists', () => {
       before(() => {
-        findAllStub.resolves([userPayload1, userPayload2, userPayload3]);
+        sinon.stub(User, 'findAll').resolves([userResultPayload1, userResultPayload2, userResultPayload3]);
       });
 
       after(() => {
-        findAllStub.restore();
+        User.findAll.restore();
       });
 
       it('status is 200', async () => {
@@ -164,11 +183,11 @@ describe('Route USERS', () => {
     describe('User not exists', () => {
 
       before(() => {
-        findByPkStub.resolves(null);
+        sinon.stub(User, 'findByPk').resolves(null);
       });
 
       after(() => {
-        findByPkStub.restore();
+        User.findByPk.restore();
       });
 
       it('status is 403', async () => {
@@ -184,12 +203,12 @@ describe('Route USERS', () => {
 
     describe('User exists', () => {
       before(async () => {
-        findByPkStub.resolves(userPayload1);
+        sinon.stub(User, 'findByPk').resolves(userResultPayload1);
       });
 
       after(async () => {
         try {
-          findByPkStub.restore();
+          User.findByPk.restore();
         } catch (error) {
           console.error(error.message);
         }
@@ -251,11 +270,11 @@ describe('Route USERS', () => {
     describe('Sellers not exists', () => {
 
       before(() => {
-        findAllStub.resolves([]);
+        sinon.stub(User, 'findAll').resolves([]);
       });
 
       after(() => {
-        findAllStub.restore();
+        User.findAll.restore();
       });
 
       it('status is 200', async () => {
@@ -276,7 +295,7 @@ describe('Route USERS', () => {
 
     describe('Sellers exists', () => {
       before(async () => {
-        findAllStub.resolves([userPayload2, userPayload3]);
+        sinon.stub(User, 'findAll').resolves([userResultPayload2, userResultPayload3]);
         await User.create({
           name: userPayload2.name,
           email: userPayload2.email,
@@ -287,7 +306,7 @@ describe('Route USERS', () => {
 
       after(async () => {
         try {
-          findAllStub.restore();
+          User.findAll.restore();
           await User.destroy({ where: { name: userPayload2.name } });
         } catch (error) {
           console.error(error.message);
@@ -306,7 +325,6 @@ describe('Route USERS', () => {
   
       it('array is not empty', async () => {
         const result = await chai.request(app).get('/users/sellers').set({ authorization: tokenValidBySellers });
-        console.log(`AQUI: ${result}`);
         expect(result.body).to.be.not.empty;
       });
 
