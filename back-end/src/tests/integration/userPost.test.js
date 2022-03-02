@@ -6,9 +6,8 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const { user: User } = require('../../database/models');
-
 const app = require('../../api/app');
+const { user: User } = require('../../database/models');
 
 // omitir os `console.log`s dos testes gerando um `stub` pra função
 const consoleLogStub = stub(console, 'log');
@@ -16,8 +15,9 @@ before(()=> consoleLogStub.returns(true));
 after(()=> consoleLogStub.restore());
 
 const userPayload1 = {
-  name: 'Usuario Cadastrado integration',
-  email: 'usuario_integration@gmail.com',
+  id: 1,
+  name: 'Usuario Cadastrado 1',
+  email: 'usuario_1@gmail.com',
   password: '123456',
   role: 'customer',
 };
@@ -234,7 +234,8 @@ describe('Route USERS', () => {
           expect(message).to.be.equals('User is not administrator');
       });
 
-      it('return: Name or email already registered', async () => {
+      describe('when the user is already registered', () => {
+        before(async () => {
           await chai.request(app)
           .post('/users')
           .send({
@@ -243,18 +244,25 @@ describe('Route USERS', () => {
             password: userPayload1.password,
             role: userPayload1.role,
           });
-          postUser = await chai.request(app)
-          .post('/users')
-          .send({
-            name: userPayload1.name,
-            email: userPayload1.email,
-            password: userPayload1.password,
-            role: userPayload1.role,
-          });
-          const { status, body: { message } } = postUser;
-          expect(status).to.be.equals(409);
-          expect(message).to.be.equals('Name or email already registered');
+        });
+  
+        after(async () => {
           await User.destroy({ where: { name: userPayload1.name } });
+        });
+
+        it('return: Name or email already registered', async () => {
+            postUser = await chai.request(app)
+            .post('/users')
+            .send({
+              name: userPayload1.name,
+              email: userPayload1.email,
+              password: userPayload1.password,
+              role: userPayload1.role,
+            });
+            const { status, body: { message } } = postUser;
+            expect(status).to.be.equals(409);
+            expect(message).to.be.equals('Name or email already registered');
+        });
       });
     });
   });
