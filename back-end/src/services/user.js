@@ -95,7 +95,7 @@ const exclude = async (id, loggedUser) => {
   const userExists = await User.findByPk(id);
   if (!userExists) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
-  if (id !== loggedUser.id && !isLoggedUserAdministrator(loggedUser)) {
+  if (loggedUser.id !== parseInt(id, 10) && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
   }
 
