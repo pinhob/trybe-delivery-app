@@ -7,7 +7,7 @@ const authService = require('../../services/authService');
 
 const userPayload1 = {
   id: 1,
-  name: 'Usuario Cadastrado 1',
+  name: 'Usuario Cadastrado Unit Test Service User',
   email: 'usuario_1@gmail.com',
   password: '123456',
   role: 'customer',
@@ -31,7 +31,7 @@ const userPayload3 = {
 
 const userReturnPayload1 = {
   id: 1,
-  name: 'Usuario Cadastrado 1',
+  name: 'Usuario Cadastrado Unit Test Service User',
   email: 'usuario_1@gmail.com',
   role: 'customer',
 };
@@ -240,7 +240,7 @@ describe('Testing Users Services', () => {
         User.create.restore();
       });
 
-      it('returns an object with name, email, role and token fields ', async () => {
+      it('returns an object with name, email, role and token fields', async () => {
         const response = await userService.create({
           name: userPayload1.name,
           email: userPayload1.email,
