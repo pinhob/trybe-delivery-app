@@ -649,4 +649,142 @@ describe('Route SALES', () => {
     });
     
   });
+
+  describe('PUT status', () => {
+    describe('Sale not exists', () => {
+      let resultUpdateSale;
+      before(async () => {
+        sinon.stub(Sale, 'findByPk').resolves(null);
+        sinon.stub(Sale, 'update').resolves(true);
+        resultUpdateSale = await chai.request(app)
+          .put('/sales/1/status?status=Entregue')
+          .set({ authorization: tokenValid });
+      });
+
+      after(() => {
+        Sale.findByPk.restore();
+        Sale.update.restore();
+      });
+      
+      it('return 404', async () => {
+        expect(resultUpdateSale.status).to.be.equals(404);
+      });
+      
+      it('Sale does not exist', async () => {
+        expect(resultUpdateSale.body.message).to.be.equals('Sale does not exist');
+      });
+    });
+
+    describe('Status not send', () => {
+      let resultUpdateSale;
+      before(async () => {
+        sinon.stub(Sale, 'findByPk').resolves(salesReturnPayload1[0]);
+        sinon.stub(Sale, 'update').resolves(true);
+        resultUpdateSale = await chai.request(app)
+          .put('/sales/1/status')
+          .set({ authorization: tokenValid });
+      });
+
+      after(() => {
+        Sale.findByPk.restore();
+        Sale.update.restore();
+      });
+      
+      it('return 400', async () => {
+        expect(resultUpdateSale.status).to.be.equals(400);
+      });
+      
+      it('Status not found', async () => {
+        expect(resultUpdateSale.body.message).to.be.equals('Status not found');
+      });
+    });
+
+    describe('Status empty', () => {
+      let resultUpdateSale;
+      before(async () => {
+        sinon.stub(Sale, 'findByPk').resolves(salesReturnPayload1[0]);
+        sinon.stub(Sale, 'update').resolves(true);
+        resultUpdateSale = await chai.request(app)
+          .put('/sales/1/status?status=')
+          .set({ authorization: tokenValid });
+      });
+
+      after(() => {
+        Sale.findByPk.restore();
+        Sale.update.restore();
+      });
+      
+      it('return 400', async () => {
+        expect(resultUpdateSale.status).to.be.equals(400);
+      });
+      
+      it('Status not found', async () => {
+        expect(resultUpdateSale.body.message).to.be.equals('Status not found');
+      });
+    });
+
+    describe('Sale exists', () => {
+      let resultUpdateSale;
+      before(async () => {
+        sinon.stub(Sale, 'findByPk').resolves(salesReturnPayload1[0]);
+        sinon.stub(Sale, 'update').resolves(true);
+        resultUpdateSale = await chai.request(app)
+          .put('/sales/1/status?status=Entregue')
+          .set({ authorization: tokenValid });
+      });
+
+      after(() => {
+        Sale.findByPk.restore();
+        Sale.update.restore();
+      });
+      
+      it('return 200', async () => {
+        expect(resultUpdateSale.status).to.be.equals(200);
+      });
+
+      it('returns a object', async () => {
+        expect(typeof resultUpdateSale).to.be.equals('object');
+      });
+
+      it('return a "id" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('id');
+      });
+
+      it('return a "userId" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('userId');
+      });
+
+      it('return a "sellerId" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('sellerId');
+      });
+
+      it('return a "totalPrice" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('totalPrice');
+      });
+
+      it('return a "deliveryAddress" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('deliveryAddress');
+      });
+
+      it('return a "deliveryNumber" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('deliveryNumber');
+      });
+
+      it('return a "status" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('status');
+      });
+
+      it('return a "user" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('user');
+      });
+
+      it('return a "seller" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('seller');
+      });
+
+      it('return a "products" property', async () => {
+        expect(resultUpdateSale.body).to.be.have.a.property('products');
+      });
+    });
+  });
 });
