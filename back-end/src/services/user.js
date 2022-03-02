@@ -70,7 +70,7 @@ const getByName = async (name) => {
 };
 
 const getById = async (id, loggedUser) => {
-  if (loggedUser.id !== id && !isLoggedUserAdministrator(loggedUser)) {
+  if (loggedUser.id !== parseInt(id, 10) && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
   }
   const result = await User.findByPk(id, {
