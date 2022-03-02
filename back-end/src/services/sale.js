@@ -94,7 +94,7 @@ const getById = async (id) => {
     include: includeObjectSale,
   });
 
-  if (!result) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+  if (!result) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
   return result;
 };
