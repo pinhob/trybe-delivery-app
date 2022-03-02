@@ -15,3 +15,9 @@ export const getSellers = (token) => axios.get(`${URL}/users/sellers`,
 
 export const createSale = (sale, token) => axios.post(`${URL}/sales`, sale,
   { headers: { authorization: `${token}` } });
+
+export const fetchAllSales = (token) => axios.get(`${URL}/sales`,
+  { headers: { authorization: `${token}` } });
+
+export const fetchSaleById = (id, token) => axios.get(`${URL}/sales/${id}`,
+  { headers: { authorization: `${token}` } });

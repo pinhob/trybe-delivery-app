@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { infoUser } from '../../../app/slices/user';
 
 const NavBarCliente = () => {
-  const user = useSelector((state) => state.user);
+  const usuario = JSON.parse(localStorage.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const checkout = {
@@ -28,7 +28,7 @@ const NavBarCliente = () => {
           <li>
             PRODUTOS
           </li>
-          <button type="button">
+          <button onClick={ () => history.push('/meuspedidos') } type="button">
             MEUS PEDIDOS
           </button>
         </ul>
@@ -36,7 +36,7 @@ const NavBarCliente = () => {
       <div>
         <ul>
           <li>
-            {user.name}
+            {usuario.name}
           </li>
           <button onClick={ checkoutClick } type="button">
             Sair
