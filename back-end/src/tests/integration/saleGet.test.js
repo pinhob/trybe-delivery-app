@@ -12,9 +12,9 @@ const {
 } = require('../../database/models');
 
 // omitir os `console.log`s dos testes gerando um `stub` pra função
-const consoleLogStub = sinon.stub(console, 'log');
-before(()=> consoleLogStub.returns(true));
-after(()=> consoleLogStub.restore());
+// const consoleLogStub = sinon.stub(console, 'log');
+// before(()=> consoleLogStub.returns(true));
+// after(()=> consoleLogStub.restore());
 
 const userPayload1 = {
   id: 1,
