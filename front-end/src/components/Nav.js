@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { infoUser } from '../../../app/slices/user';
+import { infoUser } from '../app/slices/user';
 
-const NavBarCliente = () => {
+const Nav = () => {
   const usuario = JSON.parse(localStorage.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -47,4 +47,4 @@ const NavBarCliente = () => {
   );
 };
 
-export default NavBarCliente;
+export default Nav;
