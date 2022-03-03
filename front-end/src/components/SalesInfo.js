@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
-import { createSale, getSellers } from '../../../api';
+import { createSale, getSellers } from '../api';
 
 const InfoDaCompra = ({ produtosCarrinho }) => {
   const [vendedores, setVendedores] = useState([]);
@@ -122,7 +122,11 @@ const InfoDaCompra = ({ produtosCarrinho }) => {
 };
 
 InfoDaCompra.propTypes = {
-  produtosCarrinho: PropTypes.shape({}).isRequired,
+  produtosCarrinho: PropTypes.shape({
+    filter: PropTypes.func.isRequired,
+    map: PropTypes.func.isRequired,
+    forEach: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default InfoDaCompra;

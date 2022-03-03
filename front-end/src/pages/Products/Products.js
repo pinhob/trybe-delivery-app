@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../../api/index';
-import InfoDaCompra from './Componentes/infoCompra';
-import NavBarCliente from './Componentes/Nav';
+import SalesInfo from '../../components/SalesInfo';
+import Nav from '../../components/Nav';
 import '../index.css';
-import Produtos from './Componentes/Produtos';
+import * as ProductComponent from '../../components/Products';
 
 const Products = () => {
   const infoUsuario = JSON.parse(localStorage.user);
@@ -23,9 +23,9 @@ const Products = () => {
 
   return (
     <main>
-      <NavBarCliente />
-      <Produtos produtos={ produtos } setProdutos={ setProdutos } />
-      <InfoDaCompra produtosCarrinho={ produtos } />
+      <Nav />
+      <ProductComponent produtos={ produtos } setProdutos={ setProdutos } />
+      <SalesInfo produtosCarrinho={ produtos } />
     </main>
   );
 };

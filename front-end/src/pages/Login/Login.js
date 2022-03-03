@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { infoUser } from '../../app/slices/user';
-import { loginUser } from '../../api';
+import { infoUser } from '../../../app/slices/user';
+import { loginUser } from '../../../api';
+import './Login.css';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     if (e.target.name === 'cadastrar') {
-      history.push('/cadastro');
+      history.push('/register');
     }
   };
 
@@ -29,7 +30,7 @@ const Login = () => {
     if (data) {
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      history.push('/produtos');
+      history.push('/customer/products');
     }
   };
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { fetchSaleById, getSellers } from '../../../../api';
-import NavBarCliente from '../../../Produtos/Componentes/Nav';
+import { useParams } from 'react-router';
+import { fetchSaleById, getSellers } from '../../api';
+import Nav from '../../components/Nav';
 
-const DetalhesPedidoCliente = () => {
+const OrderDetails = () => {
   const infoUsuario = JSON.parse(localStorage.user);
   const { id } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const [detalhes, setDetalhes] = useState([]);
   const [listaVendedores, setListaVendedores] = useState([]);
 
@@ -24,11 +24,12 @@ const DetalhesPedidoCliente = () => {
     fetchData();
 
     console.log(detalhes, listaVendedores);
-  }, [infoUsuario.token]);
+  }, [detalhes, id, infoUsuario.token, listaVendedores]);
+  // }, [infoUsuario.token]); // estava dessa forma
 
   return (
     <div>
-      <NavBarCliente />
+      <Nav />
       <ul>
         { detalhes.length !== 0 ? detalhes.products.map((produto) => (
           <li key={ produto.id }>
@@ -54,4 +55,4 @@ const DetalhesPedidoCliente = () => {
   );
 };
 
-export default DetalhesPedidoCliente;
+export default OrderDetails;

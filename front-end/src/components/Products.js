@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Produtos = ({ produtos, setProdutos }) => {
+const Products = ({ produtos, setProdutos }) => {
   const addItem = (produto, index) => {
     const quantidade = produto.quantidade + 1;
 
@@ -41,4 +42,11 @@ const Produtos = ({ produtos, setProdutos }) => {
   );
 };
 
-export default Produtos;
+Products.propTypes = {
+  produtos: PropTypes.shape({
+    map: PropTypes.func.isRequired,
+  }).isRequired,
+  setProdutos: PropTypes.func.isRequired,
+};
+
+export default Products;

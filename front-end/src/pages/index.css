@@ -21,6 +21,7 @@ li {
   padding-left: 10px;
   padding-right: 10px;
 }
+<<<<<<< HEAD:front-end/src/pages/index.css
 
 .carrinhoDeCompras {
   display: flex;
@@ -31,3 +32,5 @@ li {
   display: flex;
   flex-direction: column;
 }
+=======
+>>>>>>> main-group-26-dev:front-end/src/components/NavsBar/NavBarCliente.css
