@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+
 import Comum from './pages';
 import Login from './pages/Login';
 import Products from './pages/Products';
