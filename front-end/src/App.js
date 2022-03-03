@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Cadastro from './pages/Cadastro';
+import Register from './pages/Register';
 import Login from './pages/Login';
 import Comum from './pages';
 import Products from './pages/Products';
@@ -13,7 +13,7 @@ function App() {
       <Route exact path="/" component={ Comum } />
       <Route path="/login" component={ Login } />
       <Route path="/customer/products" component={ Products } />
-      <Route path="/register" component={ Cadastro } />
+      <Route path="/register" component={ Register } />
       <Route path="/customer/orders" component={ PedidosClientes } />
       <Route path="/customer/orders/:id" component={ DetalhesPedidoCliente } />
     </Switch>

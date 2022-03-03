@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { infoUser } from '../../app/slices/user';
 import { createUser } from '../../api';
 
-const Cadastro = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const [dataUser, setDataUser] = useState({
     name: '',
@@ -70,4 +70,4 @@ const Cadastro = () => {
   );
 };
 
-export default Cadastro;
+export default Register;
