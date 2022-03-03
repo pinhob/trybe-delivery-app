@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Register from './pages/Register';
-import Login from './pages/Login';
 import Comum from './pages';
+import Login from './pages/Login';
 import Products from './pages/Products';
+import Register from './pages/Register';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 
