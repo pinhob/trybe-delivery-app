@@ -94,7 +94,7 @@ const getById = async (id) => {
     include: includeObjectSale,
   });
 
-  if (!result) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+  if (!result) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
   return result;
 };
@@ -132,7 +132,7 @@ const updateStatus = async (id, status) => {
   }
   
   const saleExists = await Sale.findByPk(id);
-  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
   await Sale.update({ status }, { where: { id } });
 
@@ -143,7 +143,7 @@ const updateStatus = async (id, status) => {
 
 const exclude = async (id, userId, role) => {
   const saleExists = await Sale.findByPk(id);
-  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_BAD_REQUEST));
+  if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
   if (saleExists.userId !== userId && role !== 'administrator') {
     throw (errorObject(ERROR.MESSAGE_UNAUTHORIZED, ERROR.STATUS_UNAUTHORIZED));
