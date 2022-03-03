@@ -1,19 +1,22 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Cadastro from './components/Comum/Cadastro/Cadastro';
-import Login from './components/Comum/Login/Login';
-import Comum from './components/Comum/Comum/Comum';
-import DetalhesCliente from './components/Detalhes/Cliente';
-import Products from './components/Produtos';
+
+import Comum from './pages';
+import Login from './pages/Login';
+import Products from './pages/Products';
+import Register from './pages/Register';
+import Orders from './pages/Orders';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Comum } />
       <Route path="/login" component={ Login } />
-      <Route path="/produtos" component={ Products } />
-      <Route path="/cadastro" component={ Cadastro } />
-      <Route path="/cliente/detalhesdopedido" component={ DetalhesCliente } />
+      <Route path="/customer/products" component={ Products } />
+      <Route path="/register" component={ Register } />
+      <Route path="/customer/orders" component={ Orders } />
+      <Route path="/customer/orders/:id" component={ OrderDetails } />
     </Switch>
   );
 }
