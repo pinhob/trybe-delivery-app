@@ -21,13 +21,3 @@ li {
   padding-left: 10px;
   padding-right: 10px;
 }
-
-.carrinhoDeCompras {
-  display: flex;
-  flex-direction: row;
-}
-
-.li-carrinho {
-  display: flex;
-  flex-direction: column;
-}

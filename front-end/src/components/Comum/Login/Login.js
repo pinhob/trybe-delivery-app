@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { infoUser } from '../../app/slices/user';
-import { loginUser } from '../../api';
+import { infoUser } from '../../../app/slices/user';
+import { loginUser } from '../../../api';
+import './Login.css';
 
 const Login = () => {
   const dispatch = useDispatch();
