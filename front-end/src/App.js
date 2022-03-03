@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Comum from './pages';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
-import DetalhesPedidoCliente from './pages/Pedidos/pedidosCliente/detalhes';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Route path="/customer/products" component={ Products } />
       <Route path="/register" component={ Register } />
       <Route path="/customer/orders" component={ Orders } />
-      <Route path="/customer/orders/:id" component={ DetalhesPedidoCliente } />
+      <Route path="/customer/orders/:id" component={ OrderDetails } />
     </Switch>
   );
 }
