@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
 
     if (e.target.name === 'cadastrar') {
-      history.push('/cadastro');
+      history.push('/register');
     }
   };
 
@@ -29,7 +29,7 @@ const Login = () => {
     if (data) {
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      history.push('/produtos');
+      history.push('/customer/products');
     }
   };
 
