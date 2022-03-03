@@ -208,6 +208,62 @@ describe('Route SALES', () => {
         expect(resultSales.body[0]).to.be.have.a.property('products');
       });
     });
+
+    describe('Sales Filter (Query paramns)', () => {
+      let resultSales;
+      before(async () => {
+        sinon.stub(Sale, 'findAll').resolves(salesReturnPayload1);
+        resultSales = await chai.request(app).get('/sales?seller=2&status=Entregue&user=6').set({ authorization: tokenValid });
+      });
+
+      after(() => {
+        Sale.findAll.restore();
+      });
+
+      it('return 200', async () => {
+        expect(resultSales.status).to.be.equals(200);
+      });
+
+      it('return a "id" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('id');
+      });
+
+      it('return a "userId" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('userId');
+      });
+
+      it('return a "sellerId" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('sellerId');
+      });
+
+      it('return a "totalPrice" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('totalPrice');
+      });
+
+      it('return a "deliveryAddress" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('deliveryAddress');
+      });
+
+      it('return a "deliveryNumber" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('deliveryNumber');
+      });
+
+      it('return a "status" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('status');
+      });
+
+      it('return a "user" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('user');
+      });
+
+      it('return a "seller" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('seller');
+      });
+
+      it('return a "products" property in array element', async () => {
+        expect(resultSales.body[0]).to.be.have.a.property('products');
+      });
+    });
   });
 
   describe('GET by Id', () => {

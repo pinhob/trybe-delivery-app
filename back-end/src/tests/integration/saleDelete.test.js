@@ -23,10 +23,17 @@ const userPayload1 = {
   role: 'administrator',
 };
 
+const userPayload2 = {
+  name: 'Usuario Cadastrado Test Integration Sale Delete2',
+  email: 'usuario_tisd2@gmail.com',
+  password: '123456',
+  role: 'customer',
+};
+
 const salesReturnPayload1 = [
   {
     id: 1,
-    userId: 4,
+    userId: 99,
     sellerId: 2,
     totalPrice: '13.77',
     deliveryAddress: 'Rua da Trybe',
@@ -123,6 +130,37 @@ describe('Route SALES', () => {
       });
     });
     
+    describe('User not crated sale', () => {
+      let resultDelete;
+      let tokenValidById2;
+      before(async () => {
+        await User.create(userPayload2);
+        const { body: { token } } = await chai.request(app)
+          .post('/login')
+          .send({
+            name: userPayload2.name,
+            password: userPayload2.password,
+          });
+          // tokenValid será usado para as requisições futuras
+        tokenValidById2 = token;
+        sinon.stub(Sale, 'findByPk').resolves(salesReturnPayload1[0]);
+        sinon.stub(Sale, 'destroy').resolves(true);
+        resultDelete = await chai.request(app).delete('/sales/1').set({ authorization: tokenValidById2 });
+      });
+      after(async () => {
+        Sale.findByPk.restore();
+        Sale.destroy.restore();
+        await User.destroy({ where: { name: userPayload2.name } });
+      });
+      it('status is 401', async () => {
+        expect(resultDelete.status).to.be.equals(401);
+      });
+      
+      it('message: Unauthorized user', async () => {
+        expect(resultDelete.body.message).to.be.equal('Unauthorized user');
+      });
+    });
+
     describe('Sale exists', () => {
       let resultDelete;
       before(async () => {
