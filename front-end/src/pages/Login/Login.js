@@ -3,15 +3,43 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { infoUser } from '../../app/slices/user';
 import { loginUser } from '../../api';
+import './Login.css';
+
+// adaptado de: https://stackoverflow.com/a/9204568
+const validateEmail = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
 
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [dataUser, setDataUser] = useState({
-    name: '',
-    password: '',
-  });
+  const [dataUser, setDataUser] = useState({ email: '', password: '' });
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isUserNotCreated, setIsUserNotCreated] = useState(false);
+
+  const handleChange = ({ target }) => {
+    const SIX = 6;
+    const targetIsEmail = target.name === 'email';
+    const emailIsValid = validateEmail(target.value);
+    const targetIsPassword = target.name === 'password';
+    const passwordIsValid = target.value.length >= SIX;
+
+    if (targetIsEmail) {
+      setIsEmailValid(emailIsValid);
+    }
+
+    if (targetIsPassword) {
+      setIsPasswordValid(passwordIsValid);
+    }
+
+    setDataUser((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -23,13 +51,19 @@ const Login = () => {
 
   const handleClickLogin = async (e) => {
     e.preventDefault();
-    const { name, password } = dataUser;
-    const { data } = await loginUser(name, password);
+    const { email, password } = dataUser;
+    const validateLogin = await loginUser(email, password);
 
-    if (data) {
+    console.log('DATA:', validateLogin);
+
+    if (!validateLogin) return setIsUserNotCreated(true);
+
+    if (validateLogin) {
+      const { data } = validateLogin;
+      console.log(data);
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      history.push('/customer/products');
+      history.push('/produtos');
     }
   };
 
@@ -42,17 +76,18 @@ const Login = () => {
         <form>
           <label htmlFor="name">
             <input
-              onChange={ (e) => setDataUser({ ...dataUser, name: e.target.value }) }
-              type="name"
-              placeholder="name"
-              name="name"
-              id="name"
+              onChange={ handleChange }
+              type="email"
+              placeholder="Insira seu email"
+              name="email"
+              id="email"
               data-testid="common_login__input-email"
             />
           </label>
           <label htmlFor="password">
             <input
-              onChange={ (e) => setDataUser({ ...dataUser, password: e.target.value }) }
+              onChange={ handleChange }
+              name="password"
               id="password"
               type="password"
               placeholder="Senha"
@@ -64,6 +99,7 @@ const Login = () => {
           <div>
             <button
               onClick={ handleClickLogin }
+              disabled={ !isEmailValid || !isPasswordValid }
               name="login"
               type="submit"
               data-testid="common_login__button-login"
@@ -84,7 +120,10 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="empty" data-testid="common_login__element-invalid-email">
+      <div
+        className={ `${isUserNotCreated ? 'error-message' : 'hided-error-message'}` }
+        data-testid="common_login__element-invalid-email"
+      >
         <p>Email ou senha inválidos</p>
       </div>
     </main>

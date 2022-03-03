@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+}
+
+.error-message {
+  background-color: lightcoral;
+  color: white;
+}
+
+.hided-error-message {
+  display: none;
+  background-color: lightcoral;
+}
