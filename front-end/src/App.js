@@ -4,8 +4,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Comum from './pages';
 import Products from './pages/Products';
+import Orders from './pages/Orders';
 import DetalhesPedidoCliente from './pages/Pedidos/pedidosCliente/detalhes';
-import PedidosClientes from './pages/Pedidos/pedidosCliente';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Route path="/login" component={ Login } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/register" component={ Register } />
-      <Route path="/customer/orders" component={ PedidosClientes } />
+      <Route path="/customer/orders" component={ Orders } />
       <Route path="/customer/orders/:id" component={ DetalhesPedidoCliente } />
     </Switch>
   );
