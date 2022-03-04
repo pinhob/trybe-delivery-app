@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { Op } = require('sequelize');
 
 const { user: User } = require('../database/models');
 
@@ -23,10 +24,15 @@ const validateDataUser = async (name, email, password, role) => {
     return (err);
   }
 
-  const nameAlreadyExists = await User.findOne({ where: { name } });
-  if (nameAlreadyExists) return (errorObject(ERROR.MESSAGE_CONFLICT_NAME, ERROR.STATUS_CONFLICT));
-  const emailAlreadyExists = await User.findOne({ where: { email } });
-  if (emailAlreadyExists) return (errorObject(ERROR.MESSAGE_CONFLICT_EMAIL, ERROR.STATUS_CONFLICT));
+  const userAlreadyExists = await User.findOne({
+    where: {
+      [Op.or]: [
+        { name },
+        { email },
+      ],
+    },
+  });
+  if (userAlreadyExists) return (errorObject(ERROR.MESSAGE_CONFLICT_USER, ERROR.STATUS_CONFLICT));
 
   return true;
 };
@@ -42,7 +48,7 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   const validDataUser = await validateDataUser(name, email, password, role);
   if (validDataUser.message) throw (validDataUser);
 
-  if (role !== 'customer' || isLoggedUserAdministrator(loggedUser)) {
+  if (role !== 'customer' && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_NOT_ADMIN, ERROR.STATUS_CONFLICT));
   }
   
@@ -64,7 +70,7 @@ const getByName = async (name) => {
 };
 
 const getById = async (id, loggedUser) => {
-  if (loggedUser.id !== id && isLoggedUserAdministrator(loggedUser)) {
+  if (loggedUser.id !== parseInt(id, 10) && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
   }
   const result = await User.findByPk(id, {
@@ -82,7 +88,6 @@ const getSellers = async () => {
       where: { role: 'seller' },
       attributes: { exclude: ['password'] },
     });
-  if (!result) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
   return result;
 };
 
@@ -90,7 +95,7 @@ const exclude = async (id, loggedUser) => {
   const userExists = await User.findByPk(id);
   if (!userExists) throw (errorObject(ERROR.MESSAGE_USER_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
-  if (userExists.id !== id && isLoggedUserAdministrator(loggedUser)) {
+  if (loggedUser.id !== parseInt(id, 10) && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_BAD_REQUEST, ERROR.STATUS_FORBIDDEN));
   }
 

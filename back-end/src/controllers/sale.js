@@ -20,7 +20,7 @@ const getAll = async (req, res, next) => {
   try {
     const { seller = '', status = '', user = '' } = req.query;
     const result = await SaleServices.getAll(seller, status, user);
-    return res.status(201).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     console.log(`ERROR: POST createSale => ${error.message}`);
     return next(error);
@@ -31,7 +31,7 @@ const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const result = await SaleServices.getById(id);
-    return res.status(201).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     console.log(`ERROR: POST createSale => ${error.message}`);
     return next(error);

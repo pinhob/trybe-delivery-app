@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { infoUser } from '../../../app/slices/user';
-import { loginUser } from '../../../api';
-import './Login.css';
+import { infoUser } from '../../app/slices/user';
+import { loginUser } from '../../api';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -48,6 +47,7 @@ const Login = () => {
               placeholder="name"
               name="name"
               id="name"
+              data-testid="common_login__input-email"
             />
           </label>
           <label htmlFor="password">
@@ -56,23 +56,36 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="Senha"
+              data-testid="common_login__input-password"
             />
           </label>
         </form>
         <div>
           <div>
-            <button onClick={ handleClickLogin } name="login" type="submit">LOGIN</button>
+            <button
+              onClick={ handleClickLogin }
+              name="login"
+              type="submit"
+              data-testid="common_login__button-login"
+            >
+              LOGIN
+            </button>
           </div>
           <div>
             <button
               onClick={ handleClick }
               name="cadastrar"
               type="submit"
+              data-testid="common_login__button-register"
             >
               Ainda não tenho conta
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="empty" data-testid="common_login__element-invalid-email">
+        <p>Email ou senha inválidos</p>
       </div>
     </main>
   );
