@@ -54,9 +54,7 @@ const Login = () => {
     const { email, password } = dataUser;
     const validateLogin = await loginUser(email, password);
 
-    console.log('DATA:', validateLogin);
-
-    if (!validateLogin) return setIsUserNotCreated(true);
+    if (validateLogin.name === 'Error') return setIsUserNotCreated(true);
 
     if (validateLogin) {
       const { data } = validateLogin;

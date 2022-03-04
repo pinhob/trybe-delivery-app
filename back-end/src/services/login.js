@@ -5,15 +5,17 @@ const authService = require('./authService');
 const { errorObject } = require('../utils/errorObject');
 const ERROR = require('../utils/messagesError');
 
-const login = async (name, password) => {
-  if (!name || !password) throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_BAD_REQUEST));
+const login = async (email, password) => {
+  console.log(email, password);
 
-  const userExists = await User.findOne({ where: { name } });
+  if (!email || !password) throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_NOT_FOUND));
+
+  const userExists = await User.findOne({ where: { email } });
   if (!userExists || password !== userExists.password) {
-    throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_BAD_REQUEST));
+    throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_NOT_FOUND));
   }
 
-  const { id, email, role } = userExists;
+  const { id, name, role } = userExists;
 
   const token = authService.genToken({ id, name, email, role });
 
