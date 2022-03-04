@@ -54,6 +54,8 @@ const Login = () => {
     const { email, password } = dataUser;
     const validateLogin = await loginUser(email, password);
 
+    console.log(validateLogin);
+
     if (validateLogin.name === 'Error') return setIsUserNotCreated(true);
 
     if (validateLogin) {
@@ -61,7 +63,7 @@ const Login = () => {
       console.log(data);
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      history.push('/produtos');
+      history.push('/customer/products');
     }
   };
 

@@ -1,5 +1,6 @@
-const { user: User } = require('../database/models');
+const md5 = require('md5');
 
+const { user: User } = require('../database/models');
 const authService = require('./authService');
 
 const { errorObject } = require('../utils/errorObject');
@@ -10,8 +11,14 @@ const login = async (email, password) => {
 
   if (!email || !password) throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_NOT_FOUND));
 
+  console.log(password);
+
+  const md5Password = md5(password);
+
+  console.log('md5', md5Password);
+
   const userExists = await User.findOne({ where: { email } });
-  if (!userExists || password !== userExists.password) {
+  if (!userExists || md5Password !== userExists.password) {
     throw (errorObject(ERROR.MESSAGE_INV_FIELDS, ERROR.STATUS_NOT_FOUND));
   }
 

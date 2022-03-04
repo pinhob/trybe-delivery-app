@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const { Op } = require('sequelize');
+const md5 = require('md5');
 
 const { user: User } = require('../database/models');
 
@@ -52,7 +53,9 @@ const create = async ({ name, email, password, role, loggedUser }) => {
     throw (errorObject(ERROR.MESSAGE_NOT_ADMIN, ERROR.STATUS_CONFLICT));
   }
   
-  const { id } = await User.create({ name, email, password, role });
+  const md5Password = md5(password);
+
+  const { id } = await User.create({ name, email, password: md5Password, role });
   const token = authService.genToken({ id, name, email, role });
   return { name, email, role, token };
 };
