@@ -8,6 +8,6 @@ body {
 }
 
 .hided-error-message {
-  display: none;
   background-color: lightcoral;
+  display: none;
 }
