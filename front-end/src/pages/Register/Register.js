@@ -101,14 +101,16 @@ const Register = () => {
           />
         </label>
       </form>
-        <div>
-          <button
-            disabled={ !isNameValid || !isEmailValid || !isPasswordValid  }
-            onClick={ handleClick }
-            type="submit"
-            data-testid="common_register__button-register"
-          >Cadastrar</button>
-        </div>
+      <div>
+        <button
+          disabled={ !isNameValid || !isEmailValid || !isPasswordValid }
+          onClick={ handleClick }
+          type="submit"
+          data-testid="common_register__button-register"
+        >
+          Cadastrar
+        </button>
+      </div>
 
       <div
         className={ `${isUserNotCreated ? 'error-message' : 'hided-error-message'}` }
