@@ -7,17 +7,19 @@ export const fetchAllProducts = (token) => axios.get(`${URL}/products`,
 
 export const createUser = (user) => axios.post(`${URL}/users`, user);
 
-export const loginUser = (name, password) => axios.post(`${URL}/login`, { name,
-  password });
+// Catch feito com base em: https://axios-http.com/docs/handling_errors
+export const loginUser = (email, password) => axios.post(`${URL}/login`, { email,
+  password })
+  .catch((error) => error.toJSON());
 
-export const getSellers = (token) => axios.get(`${URL}/users/sellers`,
-  { headers: { authorization: `${token}` } });
+export const getSellers = (token) => axios.get(`${URL}/users/sellers`, { headers:
+  { authorization: `${token}` } });
 
-export const createSale = (sale, token) => axios.post(`${URL}/sales`, sale,
-  { headers: { authorization: `${token}` } });
+export const createSale = (sale, token) => axios.post(`${URL}/sales`, sale, { headers:
+  { authorization: `${token}` } });
 
-export const fetchAllSales = (token) => axios.get(`${URL}/sales`,
-  { headers: { authorization: `${token}` } });
+export const fetchAllSales = (token) => axios.get(`${URL}/sales`, { headers:
+  { authorization: `${token}` } });
 
-export const fetchSaleById = (id, token) => axios.get(`${URL}/sales/${id}`,
-  { headers: { authorization: `${token}` } });
+export const fetchSaleById = (id, token) => axios.get(`${URL}/sales/${id}`, { headers:
+  { authorization: `${token}` } });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { fetchAllSales } from '../../../api';
-import NavBarCliente from '../../Produtos/Componentes/Nav';
+import { fetchAllSales } from '../../api';
+import Nav from '../../components/Nav';
 
 const PedidosClientes = () => {
   const infoUsuario = JSON.parse(localStorage.user);
@@ -22,7 +22,7 @@ const PedidosClientes = () => {
 
   return (
     <div>
-      <NavBarCliente />
+      <Nav />
       <ul>
         {vendas.map((venda) => (
           <li key={ venda.id }>
