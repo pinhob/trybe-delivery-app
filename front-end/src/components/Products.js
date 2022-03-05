@@ -1,39 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Products = ({ produtos, setProdutos }) => {
-  const addItem = (produto, index) => {
-    const quantidade = produto.quantidade + 1;
+const ProductsComponent = ({ products, setProducts }) => {
+  const addItem = (product, index) => {
+    const quantity = product.quantity + 1;
 
-    setProdutos(Object.values(
-      { ...produtos, [index]: { ...produtos[index], quantidade } },
+    setProducts(Object.values(
+      { ...products, [index]: { ...products[index], quantity } },
     ));
   };
 
-  const subItem = (produto, index) => {
-    let quantidade = 0;
-    if (produto.quantidade > 0) {
-      quantidade = produto.quantidade - 1;
-      setProdutos(Object.values(
-        { ...produtos, [index]: { ...produtos[index], quantidade } },
+  const subItem = (product, index) => {
+    let quantity = 0;
+    if (product.quantity > 0) {
+      quantity = product.quantity - 1;
+      setProducts(Object.values(
+        { ...products, [index]: { ...products[index], quantity } },
       ));
     }
   };
 
   return (
-    <ul>
-      {produtos.map((produto, index) => (
-        <li key={ produto.id }>
-          <div>
-            <p>{produto.price}</p>
-            <img src={ produto.url_image } alt="foto do produto" />
+    <ul className="products-cards">
+      {products.map((product, index) => (
+        <li key={ product.id } className="product-card">
+          <div className="product-card-body">
+            <img
+              className="product-card-image"
+              src={ product.url_image }
+              alt={ `foto ${product.name}` }
+            />
+            <p>{`R$ ${(product.price).toFixed(2)}`}</p>
           </div>
-          <div>
-            <p>{produto.name}</p>
-            <div>
-              <button onClick={ () => subItem(produto, index) } type="button">-</button>
-              <span>{produto.quantidade}</span>
-              <button onClick={ () => addItem(produto, index) } type="button">+</button>
+          <div className="product-card-footer">
+            <p>{product.name}</p>
+            <div className="product-card-footer-quantity">
+              <button
+                onClick={ () => subItem(product, index) }
+                type="button"
+                className="product-card-button subItem"
+              >
+                -
+              </button>
+              <input
+                onChange={ () => {} }
+                name="quantity"
+                className="product-card-quantity"
+                type="number"
+                value="0"
+                data-testid=""
+              />
+              <button
+                onClick={ () => addItem(product, index) }
+                type="button"
+                className="product-card-button addItem"
+              >
+                +
+              </button>
             </div>
           </div>
         </li>
@@ -42,11 +65,11 @@ const Products = ({ produtos, setProdutos }) => {
   );
 };
 
-Products.propTypes = {
-  produtos: PropTypes.shape({
+ProductsComponent.propTypes = {
+  products: PropTypes.shape({
     map: PropTypes.func.isRequired,
   }).isRequired,
-  setProdutos: PropTypes.func.isRequired,
+  setProducts: PropTypes.func.isRequired,
 };
 
-export default Products;
+export default ProductsComponent;
