@@ -43,6 +43,7 @@ body {
 #root {
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
   justify-content: center;
 }
 
@@ -79,8 +80,15 @@ body {
   font-family: 'PT Sans', sans-serif;
   font-weight: bold;
   font-size: 18px;
+  letter-spacing: 0.05em;
   outline: none;
   padding: 5px;
+}
+
+.nav-body-button img {
+  padding: 0 8px 0 0;
+  position: relative;
+  top: 3px;
 }
 
 .nav-body-button:hover {
@@ -98,16 +106,15 @@ opacity: 0.6;
   color: var(--main-color-3);
 }
 
-button img {
-  padding: 0 8px 0 0;
-  position: relative;
-  top: 3px;
-}
-
 .products-main {
   display: flex;
   flex-direction: column;
   max-width: 1168px;
+  width: 80%;
+}
+
+.loading {
+  height: 100vh;
 }
 
 .products-cards {
@@ -193,6 +200,13 @@ button img {
   padding: 6px 0;
   text-align: center;
   width: 39px;
+}
+
+/* https://stackoverflow.com/questions/26024771/styling-an-input-type-number */
+.product-card-quantity::-webkit-inner-spin-button,
+.product-card-quantity::-webkit-outer-spin-button {
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 .product-card-button {

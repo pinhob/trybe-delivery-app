@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import Register from './pages/Register';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
+import './App.css';
 
 function App() {
   return (

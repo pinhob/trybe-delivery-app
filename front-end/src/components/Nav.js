@@ -1,7 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { infoUser } from '../app/slices/user';
+import PropTypes from 'prop-types';
 
 import logoHorizontal from '../images/logo-horizontal.png';
 import cart from '../images/cart.png';
@@ -10,23 +9,9 @@ import myProducts from '../images/my-products.png';
 import productsSelImg from '../images/products-sel.png';
 import user from '../images/user.png';
 
-const Nav = () => {
+const Nav = ({ totalCart, userLogged }) => {
   // const usuario = JSON.parse(localStorage.user);
-  const dispatch = useDispatch();
   const history = useHistory();
-  const checkout = {
-    name: '',
-    email: '',
-    role: '',
-    token: '',
-  };
-
-  const checkoutClick = (e) => {
-    e.preventDefault();
-    localStorage.user = JSON.stringify(checkout);
-    dispatch(infoUser(checkout));
-    history.push('/login');
-  };
 
   return (
     <main className="nav-body">
@@ -34,7 +19,8 @@ const Nav = () => {
         <button
           type="button"
           className="nav-body-button selected"
-          onClick={ () => { } }
+          onClick={ () => history.push('/customer/products') }
+          data-testid="customer_products__element-navbar-link-products"
         >
           <img src={ productsSelImg } alt="Ícone de produtos" />
           Produtos
@@ -42,7 +28,8 @@ const Nav = () => {
         <button
           type="button"
           className="nav-body-button"
-          onClick={ () => { } }
+          onClick={ () => history.push('/customer/orders') }
+          data-testid="customer_products__element-navbar-link-orders"
         >
           <img src={ myProducts } alt="Ícone de Meus produtos" />
           Meus Pedidos
@@ -52,18 +39,18 @@ const Nav = () => {
         <img src={ logoHorizontal } alt="Logo Dona Tereza" />
       </div>
       <div className="nav-body-right">
-        <button
-          type="button"
+        <p
           className="nav-body-button"
-          onClick={ () => { } }
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           <img src={ user } alt="Ícone do usuário" />
-          Nome do usuário
-        </button>
+          {userLogged.name}
+        </p>
         <button
           type="button"
           className="nav-body-button logout"
-          onClick={ () => { } }
+          onClick={ () => localStorage.clear() }
+          data-testid="customer_products__element-navbar-link-logout"
         >
           <img src={ logout } alt="Ícone de sair" />
           Sair
@@ -71,14 +58,28 @@ const Nav = () => {
         <button
           type="button"
           className="nav-body-button"
-          onClick={ () => { } }
+          onClick={ () => history.push('/customer/checkout') }
+          data-testid="customer_products__button-cart"
         >
           <img src={ cart } alt="Ícone do carrinho de compras" />
-          Carrinho: R$ 999,99
+          {'Carrinho: R$ '}
+          <span data-testid="customer_products__checkout-bottom-value">
+            {totalCart.toFixed(2)}
+          </span>
         </button>
       </div>
     </main>
   );
+};
+
+Nav.propTypes = {
+  totalCart: PropTypes.number.isRequired,
+  userLogged: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Nav;
