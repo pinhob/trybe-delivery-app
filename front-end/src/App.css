@@ -1,54 +1,233 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+:root {
+
+  --main-color-1: rgb(243, 163, 15);
+
+  --main-color-2: rgb(166, 109, 5);
+
+  --main-color-3: rgb(255, 180, 41);
+
+  --main-color-4: rgb(0, 73, 166);
+
+  --main-color-5: rgb(15, 115, 242);
+
+  --main-color-6: rgb(11, 141, 23);
+  
+  --main-color-7: rgb(11, 120, 23);
+
+  --main-color-8: rgb(255, 240, 212);
+  
+  --main-color-9: rgb(191, 191, 191);
+
+  --main-color-10: rgb(74, 74, 74);
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  background-image: url('./images/bg-quadro.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  font-family: 'PT Sans', sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.nav-body {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
+  height: 144px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-body-left {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  padding: 0 0 5px;
+}
+
+.nav-body-right {
+  align-items: flex-end;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
+  height: 100%;
+  justify-content: end;
+  width: 100%;
+  padding: 0 0 5px;
+}
+
+.nav-body-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  outline: none;
+  padding: 5px;
+}
+
+.nav-body-button img {
+  padding: 0 8px 0 0;
+  position: relative;
+  top: 3px;
+}
+
+.nav-body-button:hover {
+transition: 0.5s;
+opacity: 0.6;
+
+}
+
+.logout {
+  color: rgb(168, 168, 168);
+  font-size: 16px;
+}
+
+.selected {
+  color: var(--main-color-3);
+}
+
+.products-main {
+  display: flex;
+  flex-direction: column;
+  max-width: 1168px;
+  width: 80%;
+}
+
+.loading {
   height: 100vh;
+}
+
+.products-cards {
+  background-color: white;
+  border: solid 1px rgb(188, 188, 188);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  padding: 20px 0 0;
+}
+
+.product-card {
+  background-color: white;
+  border: solid 1px rgb(188, 188, 188);
+  border-radius: 15px 0 15px 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 306px;
+  justify-content: end;
+  margin: 20px;
+  width: 218px;
+  padding: 0;
+}
+
+.product-card-body {
+  text-align: center;
+  border-radius: 16px 0 0;
+  height: 227px;
+}
+
+.product-card-body p {
+  color: var(--main-color-10);
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px white, 2px 2px 4px white, 2px 2px 6px white;
+  letter-spacing: 0.05em;
+  left: -60px;
+  top: -225px;
+  position: relative;
+}
+
+.product-card-image {
+  border-radius: 16px;
+  height: 227px;
+  object-fit: scale-down;
+  width: 216px;
+}
+
+.product-card-footer {
+  align-items: center;
+  background-color: var(--main-color-8);
+  border-radius: 0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 78px;
   width: 100%;
 }
 
-.App > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.product-card-footer p {
+  color: var(--main-color-10);
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.05em;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.product-card-footer-quantity {
+  border: 1px solid var(--main-color-9);
+  border-radius: 5px;
+  height: 33px;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.product-card-quantity {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  border: none;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 15px;
+  height: 100%;
+  margin: 0;
+  padding: 6px 0;
+  text-align: center;
+  width: 39px;
 }
 
-@keyframes clink {
+/* https://stackoverflow.com/questions/26024771/styling-an-input-type-number */
+.product-card-quantity::-webkit-inner-spin-button,
+.product-card-quantity::-webkit-outer-spin-button {
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
-  0% {
-    transform: rotate(-10deg);
-  }
+.product-card-button {
+  background-color: var(--main-color-6);
+  border: none;
+  color: white;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  height: 100%;
+  width: 39px;
+}
 
-  50% {
-    transform: rotate(20deg);
-  }
+.product-card-button:hover {
+  background-color: var(--main-color-7);
+}
 
-  100% {
-    transform: rotate(-10deg);
-  }
+.subItem {
+  border-radius: 4px 0 0 4px;
+}
+
+.addItem {
+  border-radius: 0 4px 4px 0;
 }
