@@ -12,7 +12,7 @@ import user from '../images/user.png';
 const Nav = ({ totalCart, userLogged, setInfoUsuario }) => {
   const history = useHistory();
 
-  function logout () {
+  function logout() {
     localStorage.clear();
     setInfoUsuario(null);
     history.push('/login');

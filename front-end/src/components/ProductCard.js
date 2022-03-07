@@ -13,12 +13,15 @@ const ProductCard = ({ product, index }) => {
       <div className="product-card-body">
         <img
           className="product-card-image"
-          src={ product.url_image }
+          src={ product.urlImage }
           alt={ `foto ${product.name}` }
           data-testid={ `customer_products__img-card-bg-image-${product.id}` }
         />
-        <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-          {`R$ ${(product.price).toFixed(2)}`}
+        <p>
+          {'R$ '}
+          <span data-testid={ `customer_products__element-card-price-${product.id}` }>
+            {(product.price).replace('.', ',')}
+          </span>
         </p>
       </div>
       <div className="product-card-footer">
@@ -30,7 +33,7 @@ const ProductCard = ({ product, index }) => {
             onClick={ () => dispatch(subQtyItem({ product, index })) }
             type="button"
             className="product-card-button subItem"
-            data-testid={ `ccustomer_products__button-card-rm-item-${product.id}` }
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
           >
             -
           </button>

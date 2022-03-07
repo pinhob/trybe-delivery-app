@@ -18,7 +18,7 @@ const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
-  const [isUserNotCreated, setIsUserNotCreated] = useState(false);
+  const [isUserAlreadyCreated, setIsUserAlreadyCreated] = useState(false);
 
   const handleChange = ({ target }) => {
     const SIX = 6;
@@ -29,10 +29,6 @@ const Register = () => {
     const passwordIsValid = target.value.length >= SIX;
     const targetIsName = target.name === 'name';
     const nameIsValid = target.value.length >= TWELVE;
-
-    console.log(dataUser);
-
-    console.log('name', isNameValid, 'email', isEmailValid, 'pass', isPasswordValid);
 
     setDataUser((prevState) => ({
       ...prevState,
@@ -55,9 +51,20 @@ const Register = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    const { data } = await createUser(dataUser);
-    console.log(data);
-    if (data) {
+    const CONFLICT_STATUS = 409;
+    const CREATED_STATUS = 201;
+
+    const user = await createUser(dataUser);
+    const { data, status } = user;
+
+    console.log(user);
+
+    if (status === CONFLICT_STATUS) {
+      setIsUserAlreadyCreated(true);
+    }
+
+    if (status === CREATED_STATUS) {
+      setIsUserAlreadyCreated(false);
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
       history.push('/customer/products');
@@ -74,7 +81,7 @@ const Register = () => {
           <input
             onChange={ handleChange }
             type="name"
-            placeholder="name"
+            placeholder="Nome (pelo menos 12 caracteres)"
             name="name"
             id="name"
             data-testid="common_register__input-name"
@@ -113,10 +120,10 @@ const Register = () => {
       </div>
 
       <div
-        className={ `${isUserNotCreated ? 'error-message' : 'hided-error-message'}` }
-        data-testid=" common_register__element-invalid_register"
+        className={ `${isUserAlreadyCreated ? 'error-message' : 'hided-error-message'}` }
+        data-testid="common_register__element-invalid_register"
       >
-        <p>Campos inválidos</p>
+        <p>Email ou nome já registrados</p>
       </div>
     </main>
   );

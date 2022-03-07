@@ -16,22 +16,18 @@ const Products = () => {
   );
   const [totalCart, setTotalCart] = useState(0);
 
-  const getTotalCart = () => {
+  useEffect(() => {
     setTotalCart(
       produsctsState
         .reduce((acc, currProd) => (currProd.price * currProd.quantity) + acc, 0),
     );
-  };
-
-  useEffect(() => {
-    getTotalCart();
   }, [produsctsState]);
 
   useEffect(() => {
     if (!infoUsuario) {
       history.push('/login');
     }
-  }, [infoUsuario]);
+  }, [history, infoUsuario]);
 
   const fetchData = async () => {
     const { data } = await fetchAllProducts(infoUsuario.token);
