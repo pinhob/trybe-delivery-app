@@ -5,7 +5,8 @@ const URL = 'http://localhost:3001';
 export const fetchAllProducts = (token) => axios.get(`${URL}/products`,
   { headers: { authorization: `${token}` } });
 
-export const createUser = (user) => axios.post(`${URL}/users`, user);
+export const createUser = (user) => axios.post(`${URL}/users`, user)
+  .catch((error) => error.response);
 
 // Catch feito com base em: https://axios-http.com/docs/handling_errors
 export const loginUser = (email, password) => axios.post(`${URL}/login`, { email,
