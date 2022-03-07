@@ -67,7 +67,7 @@ ProductCard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    url_image: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,

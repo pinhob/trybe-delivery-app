@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // import { useHistory } from 'react-router-dom';
 // import { fetchAllProducts } from '../../api/index';
 import { useSelector } from 'react-redux';
@@ -11,15 +11,7 @@ const Orders = () => {
   // const history = useHistory();
   // const infoUsuario = (localStorage.user) ? JSON.parse(localStorage.user) : null; // ORIGINAL
 
-  const [totalCart, setTotalCart] = useState(0);
-
-  const infoUsuario = {
-    name: 'Zé da Faca Delivery',
-    email: 'ze_da_faca@gmail.com',
-    role: 'customer',
-    // eslint-disable-next-line max-len
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IlrDqSBkYSBGYWNhIERlbGl2ZXJ5IiwiZW1haWwiOiJ6ZV9kYV9mYWNhQGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTY0NjQyNzc5MywiZXhwIjoxNjQ2NDYwMzkzfQ.1SfOBO6tX8SvvvnP7AEj2_5JOocRwg3qRrRZL_SZL3k',
-  };
+  // const [totalCart, setTotalCart] = useState(0);
 
   // const getTotalCart = () => {
   //   setTotalCart(
