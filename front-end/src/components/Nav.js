@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 
 import logoHorizontal from '../images/logo-horizontal.png';
 import cart from '../images/cart.png';
-import logout from '../images/logout.png';
+import logoutImg from '../images/logout.png';
 import myProducts from '../images/my-products.png';
 import productsSelImg from '../images/products-sel.png';
 import user from '../images/user.png';
 
-const Nav = ({ totalCart, userLogged }) => {
-  // const usuario = JSON.parse(localStorage.user);
+const Nav = ({ totalCart, userLogged, setInfoUsuario }) => {
   const history = useHistory();
+
+  function logout () {
+    localStorage.clear();
+    setInfoUsuario(null);
+    history.push('/login');
+  }
 
   return (
     <main className="nav-body">
@@ -49,10 +54,10 @@ const Nav = ({ totalCart, userLogged }) => {
         <button
           type="button"
           className="nav-body-button logout"
-          onClick={ () => localStorage.clear() }
+          onClick={ () => logout() }
           data-testid="customer_products__element-navbar-link-logout"
         >
-          <img src={ logout } alt="Ícone de sair" />
+          <img src={ logoutImg } alt="Ícone de sair" />
           Sair
         </button>
         <button
@@ -60,11 +65,12 @@ const Nav = ({ totalCart, userLogged }) => {
           className="nav-body-button"
           onClick={ () => history.push('/customer/checkout') }
           data-testid="customer_products__button-cart"
+          disabled={ totalCart === 0.00 }
         >
           <img src={ cart } alt="Ícone do carrinho de compras" />
           {'Carrinho: R$ '}
           <span data-testid="customer_products__checkout-bottom-value">
-            {totalCart.toFixed(2)}
+            {(totalCart.toFixed(2)).replace('.', ',')}
           </span>
         </button>
       </div>
@@ -80,6 +86,7 @@ Nav.propTypes = {
     role: PropTypes.string.isRequired,
     token: PropTypes.string.isRequired,
   }).isRequired,
+  setInfoUsuario: PropTypes.func.isRequired,
 };
 
 export default Nav;
