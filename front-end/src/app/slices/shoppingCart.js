@@ -29,10 +29,17 @@ export const shoppingCartSlice = createSlice({
       state.products = Object.values({ ...state.products,
         [action.payload.index]: { ...state.products[action.payload.index], quantity } });
     },
+    changeQtyRemove: (state, action) => {
+      const quantity = 0;
+      const index = state.products
+        .findIndex((product) => product.id === action.payload.product.id);
+      state.products = Object.values({ ...state.products,
+        [index]: { ...state.products[index], quantity } });
+    },
   },
 });
 
 export const {
-  setProducts, addQtyItem, subQtyItem, changeQtyItem,
+  setProducts, addQtyItem, subQtyItem, changeQtyItem, changeQtyRemove,
 } = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;

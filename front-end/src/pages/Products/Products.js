@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllProducts } from '../../api/index';
+import { fetchAllProducts, getSellers } from '../../api/index';
 import { setProducts } from '../../app/slices/shoppingCart';
+import { setSellers } from '../../app/slices/sellers';
 import Nav from '../../components/Nav';
 import '../index.css';
 import ProductCard from '../../components/ProductCard';
@@ -38,8 +39,14 @@ const Products = () => {
     dispatch(setProducts(products));
   };
 
+  const fetchSellersData = async () => {
+    const { data } = await getSellers(infoUsuario.token);
+    dispatch(setSellers(data));
+  };
+
   useEffect(() => {
     if (infoUsuario) {
+      fetchSellersData();
       fetchData();
     }
   }, []);

@@ -9,13 +9,31 @@ import myProducts from '../images/my-products.png';
 import productsSelImg from '../images/products-sel.png';
 import user from '../images/user.png';
 
-const Nav = ({ totalCart, userLogged, setInfoUsuario }) => {
+const Nav = ({ totalCart, userLogged }) => {
   const history = useHistory();
 
   function logout() {
     localStorage.clear();
-    setInfoUsuario(null);
+    // setInfoUsuario(null);
     history.push('/login');
+  }
+
+  function renderCartButton() {
+    return (
+      <button
+        type="button"
+        className="nav-body-button"
+        onClick={ () => history.push('/customer/checkout') }
+        data-testid="customer_products__button-cart"
+        disabled={ totalCart === 0.00 }
+      >
+        <img src={ cart } alt="Ícone do carrinho de compras" />
+        {'Carrinho: R$ '}
+        <span data-testid="customer_products__checkout-bottom-value">
+          {(totalCart.toFixed(2)).replace('.', ',')}
+        </span>
+      </button>
+    );
   }
 
   return (
@@ -60,19 +78,7 @@ const Nav = ({ totalCart, userLogged, setInfoUsuario }) => {
           <img src={ logoutImg } alt="Ícone de sair" />
           Sair
         </button>
-        <button
-          type="button"
-          className="nav-body-button"
-          onClick={ () => history.push('/customer/checkout') }
-          data-testid="customer_products__button-cart"
-          disabled={ totalCart === 0.00 }
-        >
-          <img src={ cart } alt="Ícone do carrinho de compras" />
-          {'Carrinho: R$ '}
-          <span data-testid="customer_products__checkout-bottom-value">
-            {(totalCart.toFixed(2)).replace('.', ',')}
-          </span>
-        </button>
+        { history.location.pathname !== '/customer/checkout' && renderCartButton() }
       </div>
     </main>
   );
@@ -86,7 +92,7 @@ Nav.propTypes = {
     role: PropTypes.string.isRequired,
     token: PropTypes.string.isRequired,
   }).isRequired,
-  setInfoUsuario: PropTypes.func.isRequired,
+  // setInfoUsuario: PropTypes.func.isRequired,
 };
 
 export default Nav;
