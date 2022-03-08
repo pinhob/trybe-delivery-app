@@ -8,6 +8,13 @@ export const fetchAllProducts = (token) => axios.get(`${URL}/products`,
 export const createUser = (user) => axios.post(`${URL}/users`, user)
   .catch((error) => error.response);
 
+export const adminCreateUser = (user, token) => axios.post(`${URL}/users/admin/create`, user, {
+  headers: {
+    authorization: `${ token }`
+  }
+})
+  .catch((error) => error.response);
+
 // Catch feito com base em: https://axios-http.com/docs/handling_errors
 export const loginUser = (email, password) => axios
   .post(`${URL}/login`, { email, password }, { headers:

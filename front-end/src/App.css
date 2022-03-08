@@ -231,3 +231,13 @@ opacity: 0.6;
 .addItem {
   border-radius: 0 4px 4px 0;
 }
+
+.error-message {
+  background-color: lightcoral;
+  color: white;
+}
+
+.hided-error-message {
+  background-color: lightcoral;
+  display: none;
+}
