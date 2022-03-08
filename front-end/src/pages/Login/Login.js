@@ -63,7 +63,12 @@ const Login = () => {
       console.log(data);
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      history.push('/customer/products');
+      
+      if (data.role === 'customer') return history.push('/customer/products');
+
+      if (data.role === 'seller') return history.push('/seller/orders');
+    
+      if (data.role === 'administrator') return history.push('/admin/manage');
     }
   };
 
