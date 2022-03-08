@@ -20,7 +20,9 @@ const ProductCard = ({ product, index }) => {
         <p>
           {'R$ '}
           <span data-testid={ `customer_products__element-card-price-${product.id}` }>
-            {(product.price).replace('.', ',')}
+            {(product.price === 'string')
+              ? (product.price).replace('.', ',')
+              : (product.price).toString().replace('.', ',')}
           </span>
         </p>
       </div>

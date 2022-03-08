@@ -22,6 +22,8 @@
 
   --main-color-10: rgb(74, 74, 74);
 
+  --main-color-11: rgb(249, 98, 2);
+
 }
 
 * {
@@ -94,7 +96,6 @@ body {
 .nav-body-button:hover {
 transition: 0.5s;
 opacity: 0.6;
-
 }
 
 .logout {
@@ -240,4 +241,218 @@ opacity: 0.6;
 .hided-error-message {
   background-color: lightcoral;
   display: none;
+}
+
+.checkout-title-body {
+  max-width: 1120px;
+  width: 96%;
+}
+
+.checkout-title {
+  color: var(--main-color-10);
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  margin: 0 0 5px;
+}
+
+.checkout-body {
+  border: solid 1px rgb(188, 188, 188);
+  border-radius: 15px 0 15px 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 0 20px;
+  max-width: 1120px;
+  width: 96%;
+  padding: 20px;
+}
+
+.checkout-item {
+  align-items: center;
+  background-color: var(--main-color-8);
+  border-radius: 0 0 16px 0;
+  display: flex;
+  justify-content: center;
+  margin: 3px 0 6px;
+  padding: 0;
+}
+
+.header{
+  background-color: transparent;
+  color: var(--main-color-10);
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  height: 28px;
+  letter-spacing: 0.05em;
+  margin: -8px 0 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  /* text-align: right; */
+  padding: 0 10px 0 0;
+}
+
+.item-row {
+  height: 43px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.checkout-item-column {
+  align-self: stretch;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.item-row .checkout-item-column:first-child{
+  background-color: var(--main-color-2);
+  border-radius: 0 0 16px 0;
+  color: white;
+}
+
+.item-row .checkout-item-column:nth-child(2){
+  color: var(--main-color-10);
+  justify-content: start;
+  padding: 0 0 0 10px;
+}
+
+.item-row .checkout-item-column:nth-child(3){
+  background-color: rgba(166, 109, 5, 0.6);
+}
+
+.item-row .checkout-item-column:nth-child(4){
+  background-color: rgba(166, 109, 5, 0.3);
+}
+
+.item-row .checkout-item-column:nth-child(5){
+  background-color: rgba(166, 109, 5, 0.6);
+}
+
+.item-row .checkout-item-column:nth-child(6){
+  background-color: var(--main-color-11);
+  border-radius: 0 0 16px 0;
+}
+
+.item-row .checkout-item-column:nth-child(6):hover{
+  transition: 0.5s;
+  opacity: 0.8;
+}
+
+.item-row .checkout-item-column {
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.checkout-item-column-btn-remove {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+
+.item-row.total {
+  background-color: transparent;
+  box-shadow: none;
+  display: flex;
+  justify-content: end;
+  margin: 25px 0 0;
+}
+
+.item-row.total .checkout-item-column {
+  justify-content: flex-end;
+  width: 400px;
+}
+
+.item-row.total .checkout-item-column p {
+  margin-right:15px;
+}
+
+.column {
+  flex-grow: 2;
+}
+
+.column-simple {
+  width: 40px;
+}
+
+.column-double {
+  width: 105px;
+}
+
+.checkout-body form {
+  display: flex;
+  justify-content: space-between;
+  margin: -5px 0 0;
+  width: 100%;
+}
+
+.checkout-body form label{
+  display: flex;
+  flex-direction: column;
+  color: var(--main-color-10);
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.checkout-body form label :first-child {
+  margin: 5px 0 0;
+  padding: 6px;
+}
+
+.checkout-body form label:first-child {
+  flex-grow: 2;
+}
+
+.checkout-body form label:nth-child(2) {
+  flex-grow: 7;
+  margin: 0 15px;
+}
+
+.checkout-body form label:last-child {
+  flex-grow: 2;
+}
+
+.item-row.submit {
+  background-color: transparent;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 0;
+}
+
+.item-row.submit .checkout-item-column {
+  border-radius: 16px;
+  justify-content: center;
+  width: 400px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+.item-row.submit .checkout-item-column:hover {
+  transition: 0.5s;
+  opacity: 0.8;
+}
+
+.item-row.submit .checkout-item-column button {
+  color: var(--main-color-8);
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  letter-spacing: 0.03em;
+  height: 100%;
+  width: 100%;
+}
+
+.item-row.submit .checkout-item-column button:disabled {
+  color: var(--main-color-10);
 }
