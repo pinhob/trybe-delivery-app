@@ -52,6 +52,8 @@ const create = async ({ name, email, password, role, loggedUser }) => {
   if (role !== 'customer' && !isLoggedUserAdministrator(loggedUser)) {
     throw (errorObject(ERROR.MESSAGE_NOT_ADMIN, ERROR.STATUS_CONFLICT));
   }
+
+  console.log(isLoggedUserAdministrator(loggedUser));
   
   const md5Password = md5(password);
 
