@@ -20,6 +20,20 @@ const Login = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserNotCreated, setIsUserNotCreated] = useState(false);
 
+  const redirectUser = (role) => {
+    if (role === 'customer') {
+      history.push('/customer/products');
+    }
+
+    if (role === 'seller') {
+      history.push('/seller/orders');
+    }
+
+    if (role === 'administrator') {
+      history.push('/admin/manage');
+    }
+  };
+
   const handleChange = ({ target }) => {
     const SIX = 6;
     const targetIsEmail = target.name === 'email';
@@ -41,14 +55,6 @@ const Login = () => {
     }));
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    if (e.target.name === 'cadastrar') {
-      history.push('/register');
-    }
-  };
-
   const handleClickLogin = async (e) => {
     e.preventDefault();
     const { email, password } = dataUser;
@@ -63,12 +69,8 @@ const Login = () => {
       console.log(data);
       dispatch(infoUser(data));
       localStorage.user = JSON.stringify(data);
-      
-      if (data.role === 'customer') return history.push('/customer/products');
 
-      if (data.role === 'seller') return history.push('/seller/orders');
-    
-      if (data.role === 'administrator') return history.push('/admin/manage');
+      redirectUser(data.role);
     }
   };
 
@@ -114,7 +116,7 @@ const Login = () => {
           </div>
           <div>
             <button
-              onClick={ handleClick }
+              onClick={ () => history.push('/register') }
               name="cadastrar"
               type="submit"
               data-testid="common_login__button-register"

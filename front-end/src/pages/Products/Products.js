@@ -42,7 +42,7 @@ const Products = () => {
     if (infoUsuario) {
       fetchData();
     }
-  }, []);
+  }, [fetchData, infoUsuario]);
 
   function renderMain() {
     return (

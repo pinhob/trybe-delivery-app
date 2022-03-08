@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import AdminRegisterUser from "../../components/AdminRegisterUser";
+import AdminRegisterUser from '../../components/AdminRegisterUser';
 
-const Admin = () => {
-  return (
-    <AdminRegisterUser />
-  )
-};
+const Admin = () => (
+  <AdminRegisterUser />
+);
 
 export default Admin;
