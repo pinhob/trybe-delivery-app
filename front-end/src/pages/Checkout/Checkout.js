@@ -189,6 +189,7 @@ const Checkout = () => {
                 product={ productMap }
                 index={ index }
                 removeItemCart={ removeItemCart }
+                prefix="customer_checkout"
               />))}
             {renderTotal()}
           </div>
