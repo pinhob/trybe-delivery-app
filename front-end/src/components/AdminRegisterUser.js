@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import validateEmail from '../utils/validateEmail';
 import { adminCreateUser } from '../api';
 
 const AdminRegisterUser = () => {
-  const dispatch = useDispatch();
-
-  const [infoAdmin, _setInfoAdmin] = useState(
-    (localStorage.user) ? JSON.parse(localStorage.user) : null,
-  );
+  const infoAdmin = (localStorage.user) ? JSON.parse(localStorage.user) : null;
   const [dataUser, setDataUser] = useState(
     { name: '', email: '', password: '', role: 'seller' },
   );
@@ -26,7 +21,7 @@ const AdminRegisterUser = () => {
     const passwordIsValid = target.value.length >= SIX;
     const targetIsName = target.name === 'name';
     const nameIsValid = target.value.length >= TWELVE;
-    
+
     setDataUser((prevState) => ({
       ...prevState,
       [target.name]: target.value,
@@ -61,7 +56,7 @@ const AdminRegisterUser = () => {
     }
 
     if (status === CREATED_STATUS) {
-      console.log("USUÁRIO CRIADO\n", data);
+      console.log('USUÁRIO CRIADO\n', data);
     }
   };
 

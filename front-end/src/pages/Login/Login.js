@@ -21,16 +21,21 @@ const Login = () => {
   const [isUserNotCreated, setIsUserNotCreated] = useState(false);
 
   const redirectUser = (role) => {
-    if (role === 'customer') {
+    switch (role) {
+    case 'customer':
       history.push('/customer/products');
-    }
+      break;
 
-    if (role === 'seller') {
+    case 'seller':
       history.push('/seller/orders');
-    }
+      break;
 
-    if (role === 'administrator') {
+    case 'administrator':
       history.push('/admin/manage');
+      break;
+
+    default:
+      break;
     }
   };
 
