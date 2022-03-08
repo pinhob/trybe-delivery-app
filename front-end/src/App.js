@@ -18,8 +18,8 @@ function App() {
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
       <Route path="/register" component={ Register } />
-      <Route path="/customer/orders" component={ Orders } />
       <Route path="/customer/orders/:id" component={ OrderDetails } />
+      <Route path="/customer/orders" component={ Orders } />
     </Switch>
   );
 }
