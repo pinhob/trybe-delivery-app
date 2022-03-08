@@ -110,6 +110,38 @@ const OrderDetails = () => {
           </div>
           <div className="checkout-body">
             <li className="checkout-item header">
+              <div className="checkout-item-column column text-center">
+                Pedido
+                <span data-testid="customer_order_details__element-order-details-label-order-id">
+                  {sale.id}
+                </span>
+              </div>
+              <div className="checkout-item-column column text-center">P.vend:  <span data-testid="customer_order_details__element-order-details-label-seller-name">
+                  {sale.seller.name}
+                </span></div>
+              <div className="checkout-item-column column text-center">
+                 <span data-testid="customer_order_details__element-order-details-label-order-date">
+                  {sale.saleDate}
+                </span>
+              </div>
+              <div className="checkout-item-column column text-center">
+                
+              <span data-testid="customer_order_details__element-order-details-label-delivery-status">
+                  {sale.status}
+                </span>
+              </div>
+              <div className="checkout-item-column column text-center">
+                <button
+                type="button"
+                onClick={ () => { }}
+                data-testid="customer_order_details__button-delivery-check"
+                >
+                  marcar como entregue
+                </button>
+              </div>
+            </li>
+
+            <li className="checkout-item header">
               <div className="checkout-item-column column-simple text-center">Item</div>
               <div className="checkout-item-column column text-center">Descrição</div>
               <div className="checkout-item-column column-double text-center">
