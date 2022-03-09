@@ -9,7 +9,7 @@ import myProducts from '../images/my-products.png';
 import productsSelImg from '../images/products-sel.png';
 import user from '../images/user.png';
 
-const Nav = ({ totalCart, userLogged }) => {
+const Nav = ({ totalCart, userLogged, renderCart }) => {
   const history = useHistory();
 
   function logout() {
@@ -78,10 +78,14 @@ const Nav = ({ totalCart, userLogged }) => {
           <img src={ logoutImg } alt="Ícone de sair" />
           Sair
         </button>
-        { history.location.pathname !== '/customer/checkout' && renderCartButton() }
+        { renderCart && renderCartButton() }
       </div>
     </main>
   );
+};
+
+Nav.defaultProps = {
+  renderCart: true,
 };
 
 Nav.propTypes = {
@@ -92,6 +96,7 @@ Nav.propTypes = {
     role: PropTypes.string.isRequired,
     token: PropTypes.string.isRequired,
   }).isRequired,
+  renderCart: PropTypes.bool,
   // setInfoUsuario: PropTypes.func.isRequired,
 };
 

@@ -161,6 +161,7 @@ const Checkout = () => {
           totalCart={ totalPrice }
           userLogged={ infoUsuario }
           setInfoUsuario={ setInfoUsuario }
+          renderCart={ false }
         />
         <ul className="products-cards checkout">
           <div className="checkout-title-body">
@@ -189,6 +190,7 @@ const Checkout = () => {
                 product={ productMap }
                 index={ index }
                 removeItemCart={ removeItemCart }
+                prefix="customer_checkout"
               />))}
             {renderTotal()}
           </div>
