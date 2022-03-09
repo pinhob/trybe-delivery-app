@@ -1,63 +1,78 @@
-import React from 'react';
-// import { useHistory } from 'react-router-dom';
-// import { fetchAllProducts } from '../../api/index';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { fetchAllSales } from '../../api';
 import Nav from '../../components/Nav';
-import '../index.css';
-import ProductCard from '../../components/ProductCard';
 
-const Orders = () => {
-  const produsctsState = useSelector((state) => state.shoppingCart.products);
-  // const history = useHistory();
-  // const infoUsuario = (localStorage.user) ? JSON.parse(localStorage.user) : null; // ORIGINAL
-
-  // const [totalCart, setTotalCart] = useState(0);
-
-  // const getTotalCart = () => {
-  //   setTotalCart(
-  //     produsctsState
-  //       .reduce((acc, currProd) => (currProd.price * currProd.quantity) + acc, 0),
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   getTotalCart();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!localStorage.user) {
-  //     history.push('/login');
-  //   }
-  // }, [history]);
-
-  function renderMain() {
-    return (
-      <>
-        <Nav
-          totalCart={ totalCart }
-          userLogged={ infoUsuario }
-        />
-        <ul className="products-cards">
-          {produsctsState.map((product, index) => (
-            <ProductCard
-              product={ product }
-              index={ index }
-              key={ index }
-            />
-          ))}
-        </ul>
-      </>
-    );
-  }
-
+const dateFormat = (date) => {
+  const newDate = new Date(date);
+  const day = newDate.getDate().toString().padStart(2, '0');
+  const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+  const year = newDate.getFullYear();
   return (
-    <main className="products-main">
-      <h1>Xablau</h1>
-      {produsctsState.length !== 0
-        ? renderMain()
-        : <p className="products-cards loading">Carregando...</p>}
-    </main>
+    `${day}/${month}/${year}`
   );
 };
 
-export default Orders;
+const PedidosClientes = () => {
+  const [infoUsuario, setInfoUsuario] = useState(
+    (localStorage.user) ? JSON.parse(localStorage.user) : null,
+  );
+  const history = useHistory();
+  const [vendas, setVendas] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await fetchAllSales(infoUsuario.token);
+      setVendas(data);
+    };
+    fetchData();
+  }, [infoUsuario.token]);
+
+  const verDetalhes = (id) => {
+    history.push(`/customer/orders/${id}`);
+  };
+
+  return (
+    <div>
+      <Nav
+        totalCart={ 10 }
+        userLogged={ infoUsuario }
+        setInfoUsuario={ setInfoUsuario }
+        renderCart={ false }
+      />
+      <ul>
+        {vendas.map((venda) => (
+          <li key={ venda.id }>
+            <button onClick={ () => verDetalhes(venda.id) } type="button">
+              <div>
+                <p>
+                  { 'Pedido ' }
+                  <span data-testid={ `customer_orders__element-order-id-${venda.id}` }>
+                    {venda.id}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <div>
+                  <h5
+                    data-testid={ `customer_orders__element-delivery-status-${venda.id}` }
+                  >
+                    {venda.status}
+                  </h5>
+                </div>
+                <p
+                  data-testid={ `customer_orders__element-order-date-${venda.id}` }
+                >
+                  { dateFormat(venda.saleDate) }
+                </p>
+                <p>{ venda.totalPrice.replace('.', ',') }</p>
+              </div>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default PedidosClientes;

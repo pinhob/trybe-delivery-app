@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { infoUser } from '../../app/slices/user';
@@ -15,7 +15,7 @@ const validateEmail = (email) => {
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const infoUsuario = (localStorage.user) ? JSON.parse(localStorage.user) : null;
   const [dataUser, setDataUser] = useState({ email: '', password: '' });
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -26,19 +26,35 @@ const Login = () => {
     case 'customer':
       history.push('/customer/products');
       break;
-
     case 'seller':
       history.push('/seller/orders');
       break;
-
     case 'administrator':
       history.push('/admin/manage');
       break;
-
     default:
       break;
     }
   };
+
+  useEffect(() => {
+    if (infoUsuario) {
+      // switch (infoUsuario.role) {
+      // case 'customer':
+      //   history.push('/customer/orders');
+      //   break;
+      // case 'seller':
+      //   history.push('/seller/orders');
+      //   break;
+      // case 'administrator':
+      //   history.push('/admin/manage');
+      //   break;
+      // default:
+      //   break;
+      // }
+      redirectUser(infoUsuario.role);
+    }
+  }, [infoUsuario]);
 
   const handleChange = ({ target }) => {
     const SIX = 6;
