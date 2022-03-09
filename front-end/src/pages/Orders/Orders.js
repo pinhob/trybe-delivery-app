@@ -32,7 +32,11 @@ const PedidosClientes = () => {
   }, [infoUsuario.token]);
 
   const verDetalhes = (id) => {
-    history.push(`/customer/orders/${id}`);
+    const redirect = infoUsuario.role === 'customer'
+      ? history.push(`/customer/orders/${id}`)
+      : history.push(`/seller/orders/${id}`);
+
+    return redirect;
   };
 
   return (
