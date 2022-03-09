@@ -65,7 +65,11 @@ const PedidosClientes = () => {
                 >
                   { dateFormat(venda.saleDate) }
                 </p>
-                <p>{ venda.totalPrice.replace('.', ',') }</p>
+                <p
+                  data-testid={ `customer_orders__element-card-price-${venda.id}` }
+                >
+                  { venda.totalPrice.replace('.', ',') }
+                </p>
               </div>
             </button>
           </li>
