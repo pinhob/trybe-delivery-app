@@ -20,6 +20,9 @@ const PedidosClientes = () => {
   const history = useHistory();
   const [vendas, setVendas] = useState([]);
 
+  const PREFIX = (infoUsuario.role === 'customer')
+    ? 'customer_orders' : 'seller_orders';
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await fetchAllSales(infoUsuario.token);
@@ -47,7 +50,7 @@ const PedidosClientes = () => {
               <div>
                 <p>
                   { 'Pedido ' }
-                  <span data-testid={ `customer_orders__element-order-id-${venda.id}` }>
+                  <span data-testid={ `${PREFIX}__element-order-id-${venda.id}` }>
                     {venda.id}
                   </span>
                 </p>
@@ -55,17 +58,19 @@ const PedidosClientes = () => {
               <div>
                 <div>
                   <h5
-                    data-testid={ `customer_orders__element-delivery-status-${venda.id}` }
+                    data-testid={ `${PREFIX}__element-delivery-status-${venda.id}` }
                   >
                     {venda.status}
                   </h5>
                 </div>
                 <p
-                  data-testid={ `customer_orders__element-order-date-${venda.id}` }
+                  data-testid={ `${PREFIX}__element-order-date-${venda.id}` }
                 >
                   { dateFormat(venda.saleDate) }
                 </p>
-                <p>{ venda.totalPrice.replace('.', ',') }</p>
+                <p data-testid={ `${PREFIX}__element-card-price-${venda.id}` }>
+                  { venda.totalPrice.replace('.', ',') }
+                </p>
               </div>
             </button>
           </li>

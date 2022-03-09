@@ -16,12 +16,14 @@ function App() {
     <Switch>
       <Route exact path="/" component={ Comum } />
       <Route path="/login" component={ Login } />
+      <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
-      <Route path="/register" component={ Register } />
       <Route path="/customer/orders/:id" component={ OrderDetails } />
-      <Route path="/admin/manage" component={ Admin } />
       <Route path="/customer/orders" component={ Orders } />
+      <Route path="/seller/orders/:id" component={ OrderDetails } />
+      <Route path="/seller/orders" component={ Orders } />
+      <Route path="/admin/manage" component={ Admin } />
     </Switch>
   );
 }
