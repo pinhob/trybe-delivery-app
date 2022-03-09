@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout';
 import Register from './pages/Register';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
+import Admin from './pages/Admin';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path="/customer/checkout" component={ Checkout } />
       <Route path="/register" component={ Register } />
       <Route path="/customer/orders/:id" component={ OrderDetails } />
+      <Route path="/admin/manage" component={ Admin } />
       <Route path="/customer/orders" component={ Orders } />
     </Switch>
   );

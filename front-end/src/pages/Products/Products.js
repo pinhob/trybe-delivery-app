@@ -49,7 +49,7 @@ const Products = () => {
       fetchSellersData();
       fetchData();
     }
-  }, []);
+  }, [fetchData, infoUsuario]);
 
   function renderMain() {
     return (
