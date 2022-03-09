@@ -26,3 +26,11 @@ export const fetchAllSales = (token) => axios.get(`${URL}/sales`, { headers:
 
 export const fetchSaleById = (id, token) => axios.get(`${URL}/sales/${id}`, { headers:
   { authorization: `${token}` } });
+
+export const updateStatusSale = (id, status, token) => axios
+  .put(`${URL}/sales/${id}/status`, null,
+    { params: { status }, headers: { authorization: token } });
+
+// export const updateStatusSale = (id, status, token) => axios
+//   .put(`${URL}/sales/${id}`,
+//     { params: { status }, headers: { authorization: `${token}` } });
