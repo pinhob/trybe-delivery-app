@@ -145,7 +145,6 @@ const exclude = async (id, userId, role) => {
   const saleExists = await Sale.findByPk(id);
   if (!saleExists) throw (errorObject(ERROR.MESSAGE_SALE_NOT_EXISTS, ERROR.STATUS_NOT_FOUND));
 
-
   if (saleExists.userId !== userId && role !== 'administrator') {
     throw (errorObject(ERROR.MESSAGE_UNAUTHORIZED, ERROR.STATUS_UNAUTHORIZED));
   }
