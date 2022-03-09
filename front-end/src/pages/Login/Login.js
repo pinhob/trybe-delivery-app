@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { infoUser } from '../../app/slices/user';
 import { loginUser } from '../../api';
 import './Login.css';
+import logo from '../../images/logo-vertical.png';
 
 // adaptado de: https://stackoverflow.com/a/9204568
 const validateEmail = (email) => {
@@ -80,13 +81,13 @@ const Login = () => {
   };
 
   return (
-    <main>
-      <div>
-        <div>
-          Faça seu Login
-        </div>
+    <main className="login-main">
+      <img src={ logo } alt="Logo Dona Tereza" />
+      <div className="login-body">
+        <h1>Faça seu Login</h1>
         <form>
-          <label htmlFor="name">
+          <label htmlFor="email">
+            Email
             <input
               onChange={ handleChange }
               type="email"
@@ -97,6 +98,7 @@ const Login = () => {
             />
           </label>
           <label htmlFor="password">
+            Senha
             <input
               onChange={ handleChange }
               name="password"
@@ -107,29 +109,25 @@ const Login = () => {
             />
           </label>
         </form>
-        <div>
-          <div>
-            <button
-              onClick={ handleClickLogin }
-              disabled={ !isEmailValid || !isPasswordValid }
-              name="login"
-              type="submit"
-              data-testid="common_login__button-login"
-            >
-              LOGIN
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={ () => history.push('/register') }
-              name="cadastrar"
-              type="submit"
-              data-testid="common_login__button-register"
-            >
-              Ainda não tenho conta
-            </button>
-          </div>
-        </div>
+        <button
+          className="login-button primary"
+          onClick={ handleClickLogin }
+          disabled={ !isEmailValid || !isPasswordValid }
+          name="login"
+          type="submit"
+          data-testid="common_login__button-login"
+        >
+          LOGIN
+        </button>
+        <button
+          className="login-button secondary"
+          onClick={ () => history.push('/register') }
+          name="cadastrar"
+          type="submit"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
       </div>
 
       <div

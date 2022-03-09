@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { infoUser } from '../../app/slices/user';
 import { createUser } from '../../api';
 import './Register.css';
+import logo from '../../images/logo-vertical.png';
 
 const validateEmail = (email) => {
   const re = /\S+@\S+\.\S+/;
@@ -72,44 +73,47 @@ const Register = () => {
   };
 
   return (
-    <main>
-      <div>
-        Faça seu Cadastro
-      </div>
-      <form>
-        <label htmlFor="name">
-          <input
-            onChange={ handleChange }
-            type="name"
-            placeholder="Nome (pelo menos 12 caracteres)"
-            name="name"
-            id="name"
-            data-testid="common_register__input-name"
-          />
-        </label>
-        <label htmlFor="email">
-          <input
-            onChange={ handleChange }
-            type="email"
-            placeholder="Email"
-            name="email"
-            id="email"
-            data-testid="common_register__input-email"
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            onChange={ handleChange }
-            name="password"
-            id="password"
-            type="password"
-            placeholder="Senha"
-            data-testid="common_register__input-password"
-          />
-        </label>
-      </form>
-      <div>
+    <main className="login-main">
+      <img src={ logo } alt="Logo Dona Tereza" />
+      <div className="login-body">
+        <h1>Faça seu Cadastro</h1>
+        <form>
+          <label htmlFor="name">
+            Nome
+            <input
+              onChange={ handleChange }
+              type="name"
+              placeholder="Nome (pelo menos 12 caracteres)"
+              name="name"
+              id="name"
+              data-testid="common_register__input-name"
+            />
+          </label>
+          <label htmlFor="email">
+            Email
+            <input
+              onChange={ handleChange }
+              type="email"
+              placeholder="Email"
+              name="email"
+              id="email"
+              data-testid="common_register__input-email"
+            />
+          </label>
+          <label htmlFor="password">
+            Senha
+            <input
+              onChange={ handleChange }
+              name="password"
+              id="password"
+              type="password"
+              placeholder="Senha"
+              data-testid="common_register__input-password"
+            />
+          </label>
+        </form>
         <button
+          className="login-button primary"
           disabled={ !isNameValid || !isEmailValid || !isPasswordValid }
           onClick={ handleClick }
           type="submit"
@@ -118,7 +122,6 @@ const Register = () => {
           Cadastrar
         </button>
       </div>
-
       <div
         className={ `${isUserAlreadyCreated ? 'error-message' : 'hided-error-message'}` }
         data-testid="common_register__element-invalid_register"
