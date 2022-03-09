@@ -49,6 +49,96 @@ body {
   justify-content: center;
 }
 
+.login-main {
+  display: flex;
+  flex-direction: column;
+  margin: 60px 0 0;
+}
+
+.login-body {
+  align-items: center;
+  background-color: white;
+  border: 1px solid var(--main-color-9);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 15px 40px;
+  width: 350px;
+}
+
+.login-body h1 {
+  color: var(--main-color-2);
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.login-body form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-body form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--main-color-10);
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.login-body form label input {
+  border: 1px solid var(--main-color-9);
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 15px;
+  margin-top: 5px;
+  padding: 10px 8px;
+}
+
+.login-body form label input:focus {
+  border: 1px solid var(--main-color-2);
+  outline: 0;
+}
+
+.login-button {
+  margin: 8px 0;
+  padding: 13px;
+  width: 100%;
+  border-radius: 15px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.login-button.primary {
+  background-color: var(--main-color-2);
+  border: 1px solid var(--main-color-9);
+  color: var(--main-color-8);
+}
+
+.login-button.primary:disabled {
+  background-color: var(--main-color-9);
+  border: 1px solid var(--main-color-9);
+  color: var(--main-color-8);
+}
+
+.login-button.secondary  {
+  background-color: var(--main-color-8);
+  border: 1px solid var(--main-color-2);
+  color: var(--main-color-2);
+}
+
+.login-button:hover {
+  transition: 0.5s;
+  opacity: 0.8;
+}
+
 .nav-body {
   align-items: center;
   height: 144px;
