@@ -161,6 +161,7 @@ const Checkout = () => {
           totalCart={ totalPrice }
           userLogged={ infoUsuario }
           setInfoUsuario={ setInfoUsuario }
+          renderCart={ false }
         />
         <ul className="products-cards checkout">
           <div className="checkout-title-body">
